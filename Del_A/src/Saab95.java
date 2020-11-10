@@ -11,6 +11,11 @@ public class Saab95 extends Cars{
 	    turboOn = false;
         modelName = "Saab95";
         stopEngine();
+
+        xPosition = 0.0;
+        yPosition = 0.0;
+        direction = 90;
+
     }
 
     public void setTurboOn(){
@@ -21,27 +26,35 @@ public class Saab95 extends Cars{
 	    turboOn = false;
     }
     
-    public double speedFactor(){
+    protected double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;
         return enginePower * 0.01 * turbo;
     }
 
-    public void incrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
-    }
+    public static void main (String[] args) {
+        Saab95 enSaab = new Saab95();
+        Cars enVolvo = new Volvo240();
 
-    public void decrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
-    }
-    
-    // TODO fix this method according to lab pm
-    public void gas(double amount){
-        incrementSpeed(amount);
-    }
+        System.out.println(enSaab.yPosition);
+        System.out.println(enVolvo.yPosition);
 
-    // TODO fix this method according to lab pm
-    public void brake(double amount){
-        decrementSpeed(amount);
+        enSaab.startEngine();
+        enVolvo.startEngine();
+        enSaab.move();
+        enVolvo.move();
+
+        System.out.println(enSaab.yPosition);
+        System.out.println(enVolvo.yPosition);
+
+        enSaab.turnLeft(); // 180 deg
+        enSaab.turnLeft(); // 270 deg
+        enSaab.move();
+        enSaab.move();
+        enSaab.move();
+        System.out.println(enSaab.yPosition);
+
+        enSaab.turnLeft(); // 0 deg
+        System.out.println(enSaab.direction);
     }
 }
