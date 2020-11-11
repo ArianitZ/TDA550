@@ -23,7 +23,7 @@ public abstract class Cars implements Movable{
     public double getCurrentSpeed(){
         return currentSpeed;
     }
-
+///Jakob
     public Color getColor(){
         return color;
     }
