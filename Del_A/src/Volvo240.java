@@ -3,31 +3,25 @@ import java.awt.*;
 public class Volvo240 extends Cars{
 
     private final static double trimFactor = 1.25;
-
+//(int nrDoors, double enginePower, double currentSpeed, Color color,
+//                String modelName, int direction, double xPosition, double yPosition)
     public Volvo240(){
-        nrDoors = 4;
-        color = Color.black;
-        enginePower = 100;
-        modelName = "Volvo240";
-        stopEngine();
+        super(4, 100.0, 0.0, Color.black, "Volvo240", 90, 0.0, 0.0);
 
-        xPosition = 0.0;
-        yPosition = 0.0;
-        direction = 90;
     }
 
     protected double speedFactor(){
-        return enginePower * 0.01 * trimFactor;
+        return getEnginePower() * 0.01 * trimFactor;
     }
 
     @Override
     protected void incrementSpeed(double amount){
-	    currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
+        setCurrentSpeed( Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower()) );
     }
 
     @Override
     protected void decrementSpeed(double amount){
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+        setCurrentSpeed( Math.max(getCurrentSpeed() - speedFactor() * amount,0) );
     }
 
 }

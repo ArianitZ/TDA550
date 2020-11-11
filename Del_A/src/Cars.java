@@ -2,15 +2,29 @@ import java.awt.*;
 
 public abstract class Cars implements Movable{
 
-    protected int nrDoors; // Number of doors on the car
-    protected double enginePower; // Engine power of the car
-    protected double currentSpeed; // The current speed of the car
-    protected Color color; // Color of the car
-    protected String modelName; // The car model name
+    private int nrDoors; // Number of doors on the car
+    private double enginePower; // Engine power of the car
+    private double currentSpeed; // The current speed of the car
+    private Color color; // Color of the car
+    private String modelName; // The car model name
 
-    protected int direction; // The direction of travel, in degrees. 0,90,180 or 270 degrees.
-    protected double xPosition; // x-position of car
-    protected double yPosition; // y-position of car
+    private int direction; // The direction of travel, in degrees. 0,90,180 or 270 degrees.
+    private double xPosition; // x-position of car
+    private double yPosition; // y-position of car
+
+    public Cars(int nrDoors, double enginePower, double currentSpeed, Color color,
+                String modelName, int direction, double xPosition, double yPosition)
+    {
+        this.nrDoors = nrDoors;
+        this.enginePower = enginePower;
+        this.currentSpeed = currentSpeed;
+        this.color = color;
+        this.modelName = modelName;
+
+        this.direction = direction;
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+    }
 
     public int getNrDoors(){
         return nrDoors;
@@ -28,26 +42,28 @@ public abstract class Cars implements Movable{
         return color;
     }
 
-    protected void setColor(Color clr){
+    public void setColor(Color clr){
         color = clr;
     }
 
+    public void setCurrentSpeed(double speed) { currentSpeed = speed; }
+
     public void startEngine(){
-        currentSpeed = 0.1;
+        setCurrentSpeed(0.1);
     }
 
     public void stopEngine(){
-        currentSpeed = 0;
+        setCurrentSpeed(0.0);
     }
 
     protected abstract double speedFactor();
 
     protected void incrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+        setCurrentSpeed(getCurrentSpeed() + speedFactor() * amount);
     }
 
     protected void decrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+        setCurrentSpeed( getCurrentSpeed() - speedFactor() * amount );
     }
 
     // TODO fix this method according to lab pm
@@ -60,21 +76,33 @@ public abstract class Cars implements Movable{
         decrementSpeed(amount);
     }
 
+    public int getDirection(){return direction;}
+
+    public double getxPosition(){return xPosition;}
+
+    public double getyPosition(){return yPosition;}
+
+    private void setDirection(int newDirection){ direction = newDirection; }
+
+    private void setxPosition(double newxPosition) {xPosition = newxPosition;}
+
+    private void setyPosition(double newyPosition) {yPosition = newyPosition;}
+
     public void move(){
         if (getCurrentSpeed() != 0.0)
         {
-            switch(direction) {
+            switch(getDirection()) {
                 case 0:
-                    xPosition = xPosition + getCurrentSpeed();
+                    setxPosition(getxPosition() + getCurrentSpeed());
                     break;
                 case 90:
-                    yPosition = yPosition + getCurrentSpeed();
+                    setyPosition(getyPosition() + getCurrentSpeed());
                     break;
                 case 180:
-                    xPosition = xPosition - getCurrentSpeed();
+                    setxPosition(getxPosition() - getCurrentSpeed());
                     break;
                 case 270:
-                    yPosition = yPosition - getCurrentSpeed();
+                    setyPosition(getyPosition() - getCurrentSpeed());
                     break;
                 default:
                     System.out.println("Unknown direction");
@@ -83,10 +111,13 @@ public abstract class Cars implements Movable{
     }
 
     public void turnLeft(){
-        direction = (direction == 270) ? 0 : direction + 90;
+        int newDirection = (direction == 270) ? 0 : direction + 90;
+        setDirection(newDirection);
+    }
 
-    }
     public void turnRight(){
-        direction = (direction == 0) ? 270 : direction - 90;
+        int newDirection = (direction == 0) ? 270 : direction - 90;
+        setDirection(newDirection);
     }
+
 }
