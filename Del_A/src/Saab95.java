@@ -1,19 +1,21 @@
 import java.awt.*;
 
 /**
- *  Represents the car Saab95.
+ * A class that represents the car model Saab95. It's an extension of the Cars class.
  *
+ * @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
+ * @version 1.0
  */
 public class Saab95 extends Cars{
 
     /**
-     *  Keeps the value determenting if the turbo is on or off. (Default is on.)
+     *  keeps track of whether or not the turbo is on.
+     *  Default value is off
      */
-
     private boolean turboOn;
 
     /**
-     *  Constructs the car Saab95 by calling the super constructor in Cars.
+     *  constructs the car Saab95 by calling the super constructor in Cars.
      */
     public Saab95(){
         super(2, 125.0, 0.0, Color.red, "Saab95", 90, 0.0, 0.0);
@@ -21,25 +23,25 @@ public class Saab95 extends Cars{
     }
 
     /**
-     *  Turns on the turbo.
+     *  turns on the turbo.
      */
-
     public void setTurboOn(){
 	    turboOn = true;
     }
 
     /**
-     * Turns off the turbo
+     * turns off the turbo
      */
-
     public void setTurboOff(){
 	    turboOn = false;
     }
 
     /**
-     * Calculates the speedfactor. ( which determines the speed trough incrementSpeed and decrementSpeed? )
+     * calculates the speed factor.
+     * Speed factor is used to determine the new speed when using the methods
+     * incrementSpeed and decrementSpeed.
      *
-     * @return the calculated speedfactor.
+     * @return the calculated speed factor.
      */
         public double speedFactor(){
         double turbo = 1;

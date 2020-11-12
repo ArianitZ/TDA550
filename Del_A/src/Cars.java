@@ -2,13 +2,14 @@ import java.awt.*;
 
 /**
  * An abstract class used for modelling a car's structure as well as its driving behaviours.
- * @author Arianit Zeqiri, Jakob Stråhle
+ *
+ * @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
  * @version 1.0
  */
 public abstract class Cars implements Movable{
 
     /**
-     * the number of doors of the car
+     * the number of doors that the car has
      */
     private int nrDoors;
     /**
@@ -23,7 +24,7 @@ public abstract class Cars implements Movable{
     /**
      * the color of the car
      */
-    private Color color; // Color of the car
+    private Color color;
     /**
      * the model name of the car
      */
@@ -110,7 +111,7 @@ public abstract class Cars implements Movable{
     /**
      * sets a new color for the car
      *
-     * @param clr the desired color of the car
+     * @param clr the desired color of the car, must be a Color object
      */
     public void setColor(Color clr){
         color = clr;
@@ -119,7 +120,7 @@ public abstract class Cars implements Movable{
     /**
      * changes the current speed of the car
      *
-     * @param speed the new speed of the car
+     * @param speed the new speed of the car, must be a double
      */
     public void setCurrentSpeed(double speed) { currentSpeed = speed; }
 
@@ -145,10 +146,10 @@ public abstract class Cars implements Movable{
     public abstract double speedFactor();
 
     /**
-     * increments the current speed by the amount specified by the parameter amount
+     * increments the current speed by the amount specified by the parameter 'amount'
      * The method ensures that the current speed does not exceed engine power
      *
-     * @param amount how much one wants to increase the speed of the car
+     * @param amount a double representing how much one wants to increase the speed of the car
      */
     private void incrementSpeed(double amount){
         double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
@@ -156,10 +157,10 @@ public abstract class Cars implements Movable{
     }
 
     /**
-     * decreases the current speed by the amount specified by the parameter amount
+     * decreases the current speed by the amount specified by the parameter 'amount'
      * The method ensures that the current speed does not go below 0
      *
-     * @param amount how much one wants to decrease the speed of the car
+     * @param amount a double that shows how much one wants to decrease the speed of the car
      */
     private void decrementSpeed(double amount){
         double newSpeed = Math.max( getCurrentSpeed() - speedFactor() * amount, 0);
@@ -172,9 +173,15 @@ public abstract class Cars implements Movable{
      *
      * @param amount a double representing how much one wants to increase the speed of the car
      */
-    // TODO fix this method according to lab pm
     public void gas(double amount){
-        incrementSpeed(amount);
+        if (amount <= 1 || amount >= 0)
+        {
+            incrementSpeed(amount);
+        }
+        else
+        {
+            System.out.println("amount should be between 0 and 1");
+        }
     }
 
     /**
@@ -183,9 +190,15 @@ public abstract class Cars implements Movable{
      *
      * @param amount a double representing how much one wants to decrease the speed of the car
      */
-    // TODO fix this method according to lab pm
     public void brake(double amount){
-        decrementSpeed(amount);
+        if (amount <= 1 || amount >= 0)
+        {
+            decrementSpeed(amount);
+        }
+        else
+        {
+            System.out.println("amount should be between 0 and 1");
+        }
     }
 
     /**
@@ -211,31 +224,32 @@ public abstract class Cars implements Movable{
 
 
     /**
-     *  Sets the new direction of the object.
+     *  sets the new direction of the car.
      *
-     * @param newDirection the new direction.
+     * @param newDirection an int representing the new direction.
      */
 
     private void setDirection(int newDirection){ direction = newDirection; }
 
     /**
-     * Sets the new position on the x-axis of the object.
-     * @param newxPosition the new postion on the x-axis.
+     * sets the new position on the x-axis of the car.
+     *
+     * @param newxPosition double representing the new position on the x-axis.
      */
     private void setxPosition(double newxPosition) {xPosition = newxPosition;}
 
 
     /**
+     *  sets the new position on the y-axis of the car.
      *
-     *  Sets the new position on the y-axis of the object.
-     * @param newyPosition the new postion on the y-axis.
+     * @param newyPosition double representing the new position on the y-axis.
      */
-
     private void setyPosition(double newyPosition) {yPosition = newyPosition;}
 
 
     /**
-     *  Moves the object if the object have any current speed. Where the object is moves is determined by the value of its direction and current speed.
+     *  moves the object if the object's current speed is not 0.
+     *  Where the object is moved is determined by the value of its direction and current speed.
      */
     public void move(){
         if (getCurrentSpeed() != 0.0)
@@ -260,8 +274,7 @@ public abstract class Cars implements Movable{
     }
 
     /**
-     *
-     * Turns the object 90 degrees to the left from its current direction.
+     * turns the object 90 degrees to the left from its current direction.
      */
     public void turnLeft(){
         int newDirection = (direction == 270) ? 0 : direction + 90;
@@ -269,8 +282,7 @@ public abstract class Cars implements Movable{
     }
 
     /**
-     *
-     * Turns the object 90 degrees to the right from its current direction.
+     * turns the object 90 degrees to the right from its current direction.
      */
     public void turnRight(){
         int newDirection = (direction == 0) ? 270 : direction - 90;

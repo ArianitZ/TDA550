@@ -1,19 +1,22 @@
 /**
- *  Interface for objects that are movable with following methods.
+ *  Interface for objects that are movable with the following methods.
+ *
+ * @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
+ * @version 1.0
  */
 public interface Movable {
     /**
-     * Moves the object.
+     * moves the object.
      */
     void move();
 
     /**
-     * Turns the object left.
+     * turns the object to the left.
      */
     void turnLeft();
 
     /**
-     * Turns the object right.
+     * turns the object to the right.
      */
     void turnRight();
 }
