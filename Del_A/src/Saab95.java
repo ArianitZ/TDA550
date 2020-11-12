@@ -37,13 +37,22 @@ public class Saab95 extends Cars{
     }
 
     /**
+     * returns turbo status
+     *
+     * @return boolean of the turbo status
+     */
+    public boolean getTurboOn(){
+        return turboOn;
+    }
+
+    /**
      * calculates the speed factor.
      * Speed factor is used to determine the new speed when using the methods
      * incrementSpeed and decrementSpeed.
      *
      * @return the calculated speed factor.
      */
-        public double speedFactor(){
+    public double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;
         return getEnginePower() * 0.01 * turbo;

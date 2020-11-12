@@ -122,7 +122,7 @@ public abstract class Cars implements Movable{
      *
      * @param speed the new speed of the car, must be a double
      */
-    public void setCurrentSpeed(double speed) { currentSpeed = speed; }
+    private void setCurrentSpeed(double speed) { currentSpeed = speed; }
 
     /**
      * starts the engine of the car by setting the current speed to 0.1
@@ -174,7 +174,7 @@ public abstract class Cars implements Movable{
      * @param amount a double representing how much one wants to increase the speed of the car
      */
     public void gas(double amount){
-        if (amount <= 1 || amount >= 0)
+        if (amount <= 1 && amount >= 0)
         {
             incrementSpeed(amount);
         }
@@ -191,7 +191,7 @@ public abstract class Cars implements Movable{
      * @param amount a double representing how much one wants to decrease the speed of the car
      */
     public void brake(double amount){
-        if (amount <= 1 || amount >= 0)
+        if (amount <= 1 && amount >= 0)
         {
             decrementSpeed(amount);
         }
