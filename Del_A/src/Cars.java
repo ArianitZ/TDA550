@@ -209,26 +209,33 @@ public abstract class Cars implements Movable{
      */
     public double getyPosition(){return yPosition;}
 
+
     /**
+     *  Sets the new direction of the object.
      *
-     * @param newDirection
+     * @param newDirection the new direction.
      */
+
     private void setDirection(int newDirection){ direction = newDirection; }
 
     /**
-     *
-     * @param newxPosition
+     * Sets the new position on the x-axis of the object.
+     * @param newxPosition the new postion on the x-axis.
      */
     private void setxPosition(double newxPosition) {xPosition = newxPosition;}
 
-    /**
-     *
-     * @param newyPosition
-     */
-    private void setyPosition(double newyPosition) {yPosition = newyPosition;}
 
     /**
      *
+     *  Sets the new position on the y-axis of the object.
+     * @param newyPosition the new postion on the y-axis.
+     */
+
+    private void setyPosition(double newyPosition) {yPosition = newyPosition;}
+
+
+    /**
+     *  Moves the object if the object have any current speed. Where the object is moves is determined by the value of its direction and current speed.
      */
     public void move(){
         if (getCurrentSpeed() != 0.0)
@@ -254,6 +261,7 @@ public abstract class Cars implements Movable{
 
     /**
      *
+     * Turns the object 90 degrees to the left from its current direction.
      */
     public void turnLeft(){
         int newDirection = (direction == 270) ? 0 : direction + 90;
@@ -262,6 +270,7 @@ public abstract class Cars implements Movable{
 
     /**
      *
+     * Turns the object 90 degrees to the right from its current direction.
      */
     public void turnRight(){
         int newDirection = (direction == 0) ? 270 : direction - 90;
