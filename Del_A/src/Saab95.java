@@ -6,7 +6,7 @@ import java.awt.*;
  * @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
  * @version 1.0
  */
-public class Saab95 extends Cars{
+public class Saab95 extends Car {
 
     /**
      *  keeps track of whether or not the turbo is on.

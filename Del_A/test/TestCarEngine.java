@@ -3,9 +3,9 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 
-public class TestCarsEngine {
+public class TestCarEngine {
 
-    private Cars saab;
+    private Car saab;
 
 
     @Before
