@@ -1,6 +1,7 @@
 import java.awt.*;
 
 public abstract class Truck extends Car{
+
     private int truckBedAngle;
     private int maxAngleTruckBed;
     private int minAngleTruckBed;
@@ -18,6 +19,7 @@ public abstract class Truck extends Car{
     }
 
     public int getTruckBedAngle() {return truckBedAngle;}
+
     public void setTruckBedAngle(int newAngle) {truckBedAngle = newAngle;}
 
     // TODO change this so that cars are not slower than trucks
