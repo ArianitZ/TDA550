@@ -6,7 +6,7 @@ import java.awt.*;
  * @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
  * @version 1.0
  */
-public abstract class Vehicle implements Movable{
+public abstract class Vehicle implements Movable, Cargo, Transporter{
 
     /**
      * the number of doors that the car has
@@ -244,14 +244,14 @@ public abstract class Vehicle implements Movable{
      * @param newDirection an int representing the new direction.
      */
 
-    private void setDirection(int newDirection){ direction = newDirection; }
+    public void setDirection(int newDirection){ direction = newDirection; }
 
     /**
      * sets the new position on the x-axis of the car.
      *
      * @param newxPosition double representing the new position on the x-axis.
      */
-    private void setxPosition(double newxPosition) {xPosition = newxPosition;}
+    public void setxPosition(double newxPosition) {xPosition = newxPosition;}
 
 
     /**
@@ -259,7 +259,7 @@ public abstract class Vehicle implements Movable{
      *
      * @param newyPosition double representing the new position on the y-axis.
      */
-    private void setyPosition(double newyPosition) {yPosition = newyPosition;}
+    public void setyPosition(double newyPosition) {yPosition = newyPosition;}
 
 
     /**

@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Truck extends Vehicle{
+public class Truck extends Vehicle implements Cargo, Transporter{
 
     private int truckBedAngle;
     private int maxAngleTruckBed;
@@ -12,7 +12,7 @@ public class Truck extends Vehicle{
                  double xPosition, double yPosition, double weight,
                  int minAngleTruckBed, int maxAngleTruckBed){
         super(nrDoors, enginePower, currentSpeed, color, modelName, direction,
-                weight, xPosition, yPosition);
+                xPosition, yPosition, weight);
         truckBedAngle = 0;
         this.maxAngleTruckBed = maxAngleTruckBed;
         this.minAngleTruckBed = minAngleTruckBed;
