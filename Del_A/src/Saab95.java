@@ -18,7 +18,7 @@ public class Saab95 extends Car {
      *  constructs the car Saab95 by calling the super constructor in Cars.
      */
     public Saab95(){
-        super(2, 125.0, 0.0, Color.red, "Saab95", 90, 0.0, 0.0);
+        super(2, 125.0, 0.0, Color.red, "Saab95", 90, 0.0, 0.0, 2000);
         turboOn = false;
     }
 

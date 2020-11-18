@@ -45,6 +45,11 @@ public abstract class Car implements Movable{
     private double yPosition;
 
     /**
+     * the weight of the car
+     */
+    private double weight;
+
+    /**
      * Constructs a new car for the given parameters.
      *
      * @param nrDoors an int representing the number of doors of the car
@@ -57,9 +62,11 @@ public abstract class Car implements Movable{
      *                  180 degrees (West) and 270 degrees (South).
      * @param xPosition a double that keeps track of the x position of the car
      * @param yPosition a double that keeps track of the y position of the car
+     * @param weight    a double that represents the weight of the car
      */
     public Car(int nrDoors, double enginePower, double currentSpeed, Color color,
-               String modelName, int direction, double xPosition, double yPosition)
+               String modelName, int direction, double xPosition, double yPosition,
+               double weight)
     {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
@@ -70,6 +77,8 @@ public abstract class Car implements Movable{
         this.direction = direction;
         this.xPosition = xPosition;
         this.yPosition = yPosition;
+
+        this.weight = weight;
     }
 
     /**
@@ -123,6 +132,12 @@ public abstract class Car implements Movable{
      * @param speed the new speed of the car, must be a double
      */
     private void setCurrentSpeed(double speed) { currentSpeed = speed; }
+
+    /**
+     * returns the weight of the car
+     * @return a double representing the weight of the car
+     */
+    public double getWeight(){return weight;}
 
     /**
      * starts the engine of the car by setting the current speed to 0.1

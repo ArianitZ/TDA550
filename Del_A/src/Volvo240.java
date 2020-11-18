@@ -17,7 +17,7 @@ public class Volvo240 extends Car {
      *  constructs the car Volvo240 by calling the super constructor in Cars.
      */
     public Volvo240(){
-        super(4, 100.0, 0.0, Color.black, "Volvo240", 90, 0.0, 0.0);
+        super(4, 100.0, 0.0, Color.black, "Volvo240", 90, 0.0, 0.0, 1500);
     }
 
     /**
