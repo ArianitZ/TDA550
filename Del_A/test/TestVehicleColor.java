@@ -3,10 +3,10 @@ import org.junit.Test;
 import java.awt.*;
 import static org.junit.Assert.assertTrue;
 
-public class TestCarColor {
+public class TestVehicleColor {
 
-    private Car saab;
-    private Car volvo;
+    private Vehicle saab;
+    private Vehicle volvo;
 
     @Before
     public void init(){

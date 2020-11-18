@@ -37,14 +37,14 @@ public class Loader<C> implements Loadable<C>{
 
     public static void main(String[]args){
 
-        List<Car> listOfCars = new ArrayList<>();
-        Loader<Car> tmp = new Loader<>(listOfCars, 5);
+        List<Vehicle> listOfVehicles = new ArrayList<>();
+        Loader<Vehicle> tmp = new Loader<>(listOfVehicles, 5);
 
         Saab95 saab = new Saab95();
         tmp.load(saab);
-        System.out.println(listOfCars);
-        tmp.load(new CarTransport());
-        System.out.println(listOfCars);
+        System.out.println(listOfVehicles);
+        //tmp.load(new CarTransport());
+        System.out.println(listOfVehicles);
 
 //        Volvo240 volvo = new Volvo240();
 //        tmp.load(volvo);
@@ -52,18 +52,18 @@ public class Loader<C> implements Loadable<C>{
 //        tmp.load(new Volvo240());
 //        tmp.load(new Volvo240());
 //
-//        System.out.println(listOfCars);
+//        System.out.println(listOfVehicles);
 //        tmp.load(new Volvo240());
 //
 //        tmp.unload();
-//        System.out.println(listOfCars);
+//        System.out.println(listOfVehicles);
 //        tmp.unload();
-//        System.out.println(listOfCars);
+//        System.out.println(listOfVehicles);
 //        tmp.unload();
-//        //tmp.load(listOfCars, new CarTransport());
-//        System.out.println(listOfCars);
+//        //tmp.load(listOfVehicles, new CarTransport());
+//        System.out.println(listOfVehicles);
 //        tmp.unload();
-//        System.out.println(listOfCars);
+//        System.out.println(listOfVehicles);
 
     }
 }

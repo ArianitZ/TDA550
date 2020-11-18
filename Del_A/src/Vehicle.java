@@ -6,7 +6,7 @@ import java.awt.*;
  * @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
  * @version 1.0
  */
-public abstract class Car implements Movable{
+public abstract class Vehicle implements Movable{
 
     /**
      * the number of doors that the car has
@@ -64,9 +64,9 @@ public abstract class Car implements Movable{
      * @param yPosition a double that keeps track of the y position of the car
      * @param weight    a double that represents the weight of the car
      */
-    public Car(int nrDoors, double enginePower, double currentSpeed, Color color,
-               String modelName, int direction, double xPosition, double yPosition,
-               double weight)
+    public Vehicle(int nrDoors, double enginePower, double currentSpeed, Color color,
+                   String modelName, int direction, double xPosition, double yPosition,
+                   double weight)
     {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
