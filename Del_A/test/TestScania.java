@@ -1,5 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TestScania {
@@ -8,6 +10,12 @@ public class TestScania {
 
     @Before
     public void init() { scan = new Scania(); }
+
+    @Test
+    public void TestSetSuper(){
+
+
+    }
 
     @Test
     public void testTruckBedIncrease(){
