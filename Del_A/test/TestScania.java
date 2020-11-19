@@ -12,11 +12,6 @@ public class TestScania {
     public void init() { scan = new Scania(); }
 
     @Test
-    public void TestSetSuper(){
-
-    }
-
-    @Test
     public void testTruckBedIncrease(){
         scan.increaseTruckBedAngle(20);
         assertTrue(scan.getTruckBedAngle() == 20);
