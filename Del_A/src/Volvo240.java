@@ -49,6 +49,7 @@ public class Volvo240 extends Vehicle {
      *
      * @return the calculated speed factor.
      */
+    @Override
     public double speedFactor(){
         return getEnginePower() * 0.01 * trimFactor;
     }

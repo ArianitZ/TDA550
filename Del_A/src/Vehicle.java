@@ -1,12 +1,12 @@
 import java.awt.*;
 
 /**
- * An abstract class used for modelling a car's structure as well as its driving behaviours.
+ * An class used for modelling a car's structure as well as its driving behaviours.
  *
  * @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
  * @version 1.0
  */
-public abstract class Vehicle implements Movable, Cargo, Transporter{
+public class Vehicle implements Movable, Cargo, Transporter{
 
     /**
      * the number of doors that the car has
@@ -158,7 +158,9 @@ public abstract class Vehicle implements Movable, Cargo, Transporter{
      *
      * @return the speed factor of the car
      */
-    public abstract double speedFactor();
+    public double speedFactor(){
+        return getEnginePower()*0.01;
+    };
 
     /**
      * increments the current speed by the amount specified by the parameter 'amount'

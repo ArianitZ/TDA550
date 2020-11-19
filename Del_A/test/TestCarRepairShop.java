@@ -19,17 +19,6 @@ public class TestCarRepairShop {
         carRepairShopSaab = new CarRepairShop<>();
         carRepairShopVehicle = new CarRepairShop<>();
     }
-    /* CarRepairShop;
-
-        public int getCargoQuantity(){
-        return this.repairShop.getListSize();
-    }
-    Loader;
-
-        public int getListSize(){
-        return list.size();
-    }
-    * */
 
     @Test
     public void testLoadCarRepairShop() {

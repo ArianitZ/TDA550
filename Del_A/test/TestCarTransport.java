@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 public class TestCarTransport {
 
-    private CarTransport transporter;
+    private CarTransport<Vehicle> transporter;
     private Saab95 saab;
     private Saab95 saab2;
     private Saab95 heavySaab;
@@ -26,6 +26,13 @@ public class TestCarTransport {
     public void testOpenRamp() {
         transporter.openRamp();
         assertTrue(transporter.isRampOpen());
+    }
+
+    @Test
+    public void testOpenRampWhileMoving(){
+        transporter.startEngine();
+        transporter.openRamp();
+        assertTrue(!transporter.isRampOpen());
     }
 
     @Test
