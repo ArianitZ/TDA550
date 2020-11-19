@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.*;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -9,7 +11,7 @@ public class TestScania {
     private Scania scan;
 
     @Before
-    public void init() { scan = new Scania(); }
+    public void init() { scan = new Scania(2, 100.0, 0.0, Color.blue, "Scania", 90, 0.0, 0.0, 10000, 0, 70);}
 
     @Test
     public void testTruckBedIncrease(){
