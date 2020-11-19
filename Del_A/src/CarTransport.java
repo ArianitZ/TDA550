@@ -63,8 +63,8 @@ public class CarTransport<V extends Vehicle>{
      * @param xPosition a double that keeps track of the x position of the car transport
      * @param yPosition a double that keeps track of the y position of the car transport
      * @param weight    a double that represents the weight of the car transport
-     * @param minAngleTruckBed an int that keeps track of the minimum angle of the ramp of the car transport
-     * @param maxAngleTruckBed an int that keeps track of the maximum angle of the ramp of the car transport
+     * @param minAngle an int that keeps track of the minimum angle of the ramp of the car transport
+     * @param maxAngle an int that keeps track of the maximum angle of the ramp of the car transport
      */
     public CarTransport(int nrDoors, double enginePower, double currentSpeed,
                         Color color, String modelName, int direction,
@@ -292,7 +292,7 @@ public class CarTransport<V extends Vehicle>{
 
     /**
      * unloads the car from the car transport. Checks if we have any cars loaded first.
-     * @return unloaded car.
+     * @return unloaded car or null if list is empty.
      */
     // TODO if list is empty it returns null
     public V unload(){

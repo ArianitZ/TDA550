@@ -78,7 +78,7 @@ public class CarRepairShop<V extends Vehicle> implements Transporter{
     /**
      * unloads the last vehicle thats been loaded into the shop. The unloaded car gets -0.1 in both x- and y-position
      * relative to the repair shops position.
-     * @return the unloaded vehicle.
+     * @return the unloaded vehicle or null if list is empty.
      */
     public V unload() {
         V vehicle =  repairShop.unload();
