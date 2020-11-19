@@ -1,5 +1,8 @@
 import java.util.List;
 
+/**
+ * @param <C>
+ */
 public class Loader<C extends Cargo> implements Loadable<C>{
 
     private final int maxCapacity;
@@ -35,7 +38,6 @@ public class Loader<C extends Cargo> implements Loadable<C>{
         if(list.size() >= 1) {
             C cargo = list.get(list.size()-1);
             list.remove(list.size() - 1);
-
             return cargo;
         }
         else {

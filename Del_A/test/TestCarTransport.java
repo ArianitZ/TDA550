@@ -11,12 +11,14 @@ public class TestCarTransport {
     private Saab95 saab;
     private Saab95 saab2;
     private Saab95 heavySaab;
+    private Volvo240 volvo;
 
     @Before
     public void init() {
         saab = new Saab95();
         saab2 = new Saab95();
         heavySaab = new Saab95(2, 125.0, 0.0, Color.red, "Saab95", 90, 0.0, 0.0, 5000);
+        volvo = new Volvo240(2, 125.0, 0.0, Color.red, "Saab95", 90, 0.0, 0.0, 2000);
         transporter = new CarTransport();
     }
 
@@ -77,7 +79,7 @@ public class TestCarTransport {
                 && saab.getyPosition() == transporter.getyPosition());
     }
     @Test
-    public void testCargoQuantityLimit(){
+    public void testCargoMaxLimit(){
         transporter.openRamp();
         for(int i = 0; i < transporter.getMaxCapacity(); i++){
         transporter.load(saab);
@@ -86,6 +88,16 @@ public class TestCarTransport {
 
         assertTrue(transporter.getCurrentLoadQuantity() == transporter.getMaxCapacity());
     }
+
+    @Test
+    public void testCargoMinLimit(){
+        transporter.openRamp();
+        transporter.load(saab);
+        transporter.unload();
+        transporter.unload();
+        assertTrue(transporter.getCurrentLoadQuantity() == 0);
+    }
+
     @Test
     public void testExtractingFromEmptyCargo(){
         transporter.openRamp();
@@ -98,6 +110,7 @@ public class TestCarTransport {
         saab.startEngine();
         transporter.openRamp();
         transporter.load(saab);
+        transporter.load(volvo);
         int oldNumberOfVehicles = transporter.getCurrentLoadQuantity();
         transporter.load(heavySaab);
         assertTrue(oldNumberOfVehicles == transporter.getCurrentLoadQuantity());
