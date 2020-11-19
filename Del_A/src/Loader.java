@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 // C = transportable
@@ -38,7 +37,6 @@ public class Loader<C extends Cargo> implements Loadable<C>{
         if(list.size() >= 1) {
             C cargo = list.get(list.size()-1);
             list.remove(list.size() - 1);
-
             return cargo;
         }
         else {
