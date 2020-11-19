@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class CarTransport{
 
     private Truck truck;
-    private Loader<Vehicle, Truck> cargo;
+    private Loader<Vehicle> cargo;
     private ArrayList<Vehicle> listOfVehicles;
     private int maxCapacity;
     private double cargoWeightLimit;
@@ -13,9 +13,9 @@ public class CarTransport{
     public CarTransport(){
         truck = new Truck(2, 100.0, 0.0, Color.blue, "Truck", 90, 0.0, 0.0,
                           10000.0, 0, 45);
-        listOfVehicles = new ArrayList<Vehicle>();
+        listOfVehicles = new ArrayList<>();
         maxCapacity = 10;
-        cargo = new Loader<Vehicle, Truck>(listOfVehicles, maxCapacity);
+        cargo = new Loader<>(listOfVehicles, maxCapacity);
         proximityThreshold = 0.1;
         cargoWeightLimit = 3000;
     }
@@ -28,7 +28,7 @@ public class CarTransport{
                           xPosition, yPosition, weight, minAngle, maxAngle);
         listOfVehicles = new ArrayList<>();
         this.maxCapacity = maxCapacity;
-        cargo = new Loader<Vehicle, Truck>(listOfVehicles, this.maxCapacity);
+        cargo = new Loader<>(listOfVehicles, this.maxCapacity);
         this.cargoWeightLimit = cargoWeightLimit;
     }
 
@@ -81,11 +81,7 @@ public class CarTransport{
     }
 
     private void synchronizeCargo(){
-        for(Vehicle vehicle : listOfVehicles){
-            vehicle.setxPosition(truck.getxPosition());
-            vehicle.setyPosition(truck.getyPosition());
-            vehicle.setDirection(truck.getDirection());
-        }
+        cargo.synchronizeCargo(truck);
     }
 
     public void openRamp(){
@@ -122,7 +118,8 @@ public class CarTransport{
         if(isRampOpen()){
             if(vehicleCloseEnough(vehicle)){
                 if(vehicle.getWeight() < cargoWeightLimit){
-                    cargo.load(vehicle, truck);
+                    cargo.load(vehicle);
+                    synchronizeCargo();
                 }
                 else{
                     System.out.println("The vehicle is too large to load.");

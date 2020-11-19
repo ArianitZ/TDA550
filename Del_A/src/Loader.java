@@ -3,7 +3,7 @@ import java.util.List;
 
 // C = transportable
 // T = Transporter
-public class Loader<C extends Cargo,T extends Transporter> implements Loadable<C,T>{
+public class Loader<C extends Cargo> implements Loadable<C>{
 
     private final int maxCapacity;
     private List<C> list;
@@ -14,12 +14,9 @@ public class Loader<C extends Cargo,T extends Transporter> implements Loadable<C
     }
 
     @Override
-    public void load(C c, T transporter){
+    public void load(C c){
         if(list.size() < maxCapacity) {
             list.add(c);
-            c.setxPosition(transporter.getxPosition());
-            c.setyPosition(transporter.getyPosition());
-            c.setDirection(transporter.getDirection());
         }
         else{
             System.out.println("Loader is full.");
@@ -27,6 +24,14 @@ public class Loader<C extends Cargo,T extends Transporter> implements Loadable<C
 
     }
 
+    @Override
+    public void synchronizeCargo(Transporter transporter){
+        for(C cargo : list){
+            cargo.setxPosition(transporter.getxPosition());
+            cargo.setyPosition(transporter.getyPosition());
+            cargo.setDirection(transporter.getDirection());
+        }
+    }
 
     @Override
     public C unload(){
