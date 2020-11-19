@@ -1,11 +1,12 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-public class CarTransport{
+public class CarTransport<V extends Vehicle>{
 
+    // TODO ändra namnet på Loader<V> cargo till Loader<V> loader
     private Truck truck;
-    private Loader<Vehicle> cargo;
-    private ArrayList<Vehicle> listOfVehicles;
+    private Loader<V> cargo;
+    private ArrayList<V> listOfVehicles;
     private int maxCapacity;
     private double cargoWeightLimit;
     private double proximityThreshold;
@@ -101,20 +102,20 @@ public class CarTransport{
         return truck.getTruckBedAngle() == truck.getMaxAngleTruckBed();
     }
 
-    private double getDistance(Vehicle vehicle){
+    private double getDistance(V vehicle){
         double xDiff = this.getxPosition()-vehicle.getxPosition();
         double yDiff = this.getyPosition()-vehicle.getyPosition();
 
         return Math.sqrt(xDiff*xDiff+yDiff*yDiff);
     }
 
-    private boolean vehicleCloseEnough(Vehicle vehicle){
+    private boolean vehicleCloseEnough(V vehicle){
         double absDistance = getDistance(vehicle);
         return absDistance <= proximityThreshold;
     }
 
     // TODO gör om detta lite om vi har tid
-    public void load(Vehicle vehicle) {
+    public void load(V vehicle) {
         if(isRampOpen()){
             if(vehicleCloseEnough(vehicle)){
                 if(vehicle.getWeight() < cargoWeightLimit){
@@ -135,8 +136,8 @@ public class CarTransport{
     }
 
     // TODO if list is empty it returns null
-    public Vehicle unload(){
-        Vehicle vehicle = cargo.unload();
+    public V unload(){
+        V vehicle = cargo.unload();
         try {
             vehicle.setxPosition(truck.getxPosition()-0.1);
             vehicle.setyPosition(truck.getyPosition()-0.1);

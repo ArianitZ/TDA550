@@ -1,8 +1,5 @@
-import java.util.ArrayList;
 import java.util.List;
 
-// C = transportable
-// T = Transporter
 public class Loader<C extends Cargo> implements Loadable<C>{
 
     private final int maxCapacity;

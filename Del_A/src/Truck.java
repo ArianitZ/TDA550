@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Truck extends Vehicle implements Cargo, Transporter{
+public class Truck extends Vehicle{
 
     private int truckBedAngle;
     private int maxAngleTruckBed;
