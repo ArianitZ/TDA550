@@ -3,11 +3,12 @@ import org.junit.Before;
 
 import java.awt.*;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TestCarTransport {
 
     private CarTransport transporter;
+    private CarTransport truck;
     private Saab95 saab;
     private Saab95 saab2;
     private Saab95 heavySaab;
@@ -20,12 +21,14 @@ public class TestCarTransport {
         heavySaab = new Saab95(2, 125.0, 0.0, Color.red, "Saab95", 90, 0.0, 0.0, 5000);
         volvo = new Volvo240(2, 125.0, 0.0, Color.red, "Volvo240", 90, 0.0, 0.0, 2000);
         transporter = new CarTransport();
+        truck = new CarTransport(2, 100.0, 0.0, Color.blue, "Truck", 90, 0.0, 0.0,
+                10000.0, 0, 45, 10, 3000);
     }
 
     @Test
     public void testOpenRamp() {
-        transporter.openRamp();
-        assertTrue(transporter.isRampOpen());
+        truck.openRamp();
+        assertTrue(truck.isRampOpen());
     }
 
     @Test
@@ -115,4 +118,90 @@ public class TestCarTransport {
         transporter.load(heavySaab);
         assertTrue(oldNumberOfVehicles == transporter.getCurrentLoadQuantity());
     }
+
+    @Test
+    public void TestLoadRampDown(){
+        transporter.load(saab);
+        assertTrue(transporter.getCurrentLoadQuantity()==0);
+    }
+
+    @Test
+    public void TestOpenRampWhiledriving(){
+        transporter.startEngine();
+        transporter.openRamp();
+        assertFalse(transporter.isRampOpen());
+    }
+
+    @Test
+    public void TestsetxPosition(){
+        transporter.setxPosition(1.0);
+        assertTrue(transporter.getxPosition()==1.0);
+    }
+
+    @Test
+    public void TestsetyPosition(){
+        transporter.setyPosition(1.0);
+        assertTrue(transporter.getyPosition()==1.0);
+    }
+
+    @Test
+    public void TestgetNrDoors(){
+        assertTrue(truck.getNrDoors()==2);
+    }
+
+    @Test
+    public void TestgetEnginePower(){
+        assertTrue(truck.getEnginePower()==100);
+    }
+
+    @Test
+    public void TestgetCurrentSpeed(){
+        assertTrue(truck.getCurrentSpeed()==0);
+    }
+
+    @Test
+    public void TestgetColor(){
+        assertTrue(truck.getColor()==Color.blue);
+    }
+
+    @Test
+    public void TestetColor(){
+        truck.setColor(Color.yellow);
+        assertTrue(truck.getColor()==Color.yellow);
+    }
+
+    @Test
+    public void TestgetWeigh(){
+        assertTrue(truck.getWeight()==10000.0);
+    }
+
+    @Test
+    public void TestSpeedFactor(){
+        assertTrue(truck.speedFactor()==truck.getEnginePower()*0.01);
+    }
+
+    @Test
+    public void TestGas(){
+        double oldSpeed = truck.getCurrentSpeed();
+        truck.gas(0.5);
+        double newSpeed = truck.getCurrentSpeed();
+
+        assertTrue(newSpeed >= oldSpeed);
+    }
+
+    @Test
+    public void TestBrake(){
+        truck.gas(1);
+        double oldSpeed = truck.getCurrentSpeed();
+        truck.brake(0.5);
+        double newSpeed = truck.getCurrentSpeed();
+
+        assertTrue(newSpeed <= oldSpeed);
+    }
+
+    @Test
+    public void TestgetDirection(){
+        assertTrue(truck.getDirection()==90);
+    }
+
 }

@@ -1,18 +1,39 @@
 import java.util.List;
 
-/**
- * @param <C>
- */
+ /**
+  *  A class that represents the Loading of cargo. It's an extension of Cargo and implements Loadabel.
+  *
+  *  @param <C> Is a list of cargo
+  *
+  *  @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
+  *  @version 1.0
+  */
 public class Loader<C extends Cargo> implements Loadable<C>{
 
+     /**
+      * the maximum cargo weight capacity
+      */
     private final int maxCapacity;
+
+     /**
+      * cargo list
+      */
     private List<C> list;
 
+     /**
+      * Implementation of the loader
+      * @param list cargo list
+      * @param maxCapacity the maximum cargo weight capacity
+      */
     public Loader(List<C> list, int maxCapacity){
         this.list = list;
         this.maxCapacity = maxCapacity;
     }
 
+     /**
+      * Override of the load function from the loadable
+      * @param c
+      */
     @Override
     public void load(C c){
         if(list.size() < maxCapacity) {
@@ -24,6 +45,10 @@ public class Loader<C extends Cargo> implements Loadable<C>{
 
     }
 
+     /**
+      * Override of the synchronizeCargo function from the loadable
+      * @param transporter
+      */
     @Override
     public void synchronizeCargo(Transporter transporter){
         for(C cargo : list){
@@ -33,6 +58,10 @@ public class Loader<C extends Cargo> implements Loadable<C>{
         }
     }
 
+     /**
+      * Override of the unload function from the loadable
+      * @return
+      */
     @Override
     public C unload(){
         if(list.size() >= 1) {
