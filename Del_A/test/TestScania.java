@@ -14,7 +14,6 @@ public class TestScania {
     @Test
     public void TestSetSuper(){
 
-
     }
 
     @Test
