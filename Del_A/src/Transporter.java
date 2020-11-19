@@ -1,5 +1,5 @@
 /**
- * Interface for retrieving transportation positions and direction Objects.
+ * Interface for retrieving a transporters positions and direction.
  *
  * @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
  * @version 1.0

@@ -1,18 +1,16 @@
-import java.util.List;
-
 /**
- * Interface loading loadable objects on to cargo.
- * @param <C>
+ * Interface for objects that are loadable with cargo.
+ * @param <C> the cargo to be loaded
  */
 public interface Loadable <C extends Cargo>{
     /**
-     * loads objects to the cargo.
+     * loads cargo to the loader.
      * @param c
      */
     void load(C c);
 
     /**
-     *  unloads objects to the cargo.
+     *  unloads cargo from the loader.
      */
     C unload();
 

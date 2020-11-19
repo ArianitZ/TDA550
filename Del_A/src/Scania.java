@@ -6,7 +6,6 @@ import java.awt.*;
  * @version 1.0
  */
 public class Scania extends Truck {
-    // TODO change engine power
     /**
      * constructs the car Scania by calling the super constructor in Cars.
      */
@@ -27,8 +26,8 @@ public class Scania extends Truck {
      * @param xPosition a double that keeps track of the x position of the car
      * @param yPosition a double that keeps track of the y position of the car
      * @param weight a double that represents the weight of the car
-     * @param minAngleTruckBed a int for the minimum angel of the truck bed
-     * @param maxAngleTruckBed a int for the maximum angel of the truck bed
+     * @param minAngleTruckBed an int for the minimum angel of the truck bed
+     * @param maxAngleTruckBed an int for the maximum angel of the truck bed
      */
     public Scania(int nrDoors, double enginePower, double currentSpeed,
                  Color color, String modelName, int direction,

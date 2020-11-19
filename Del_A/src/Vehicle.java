@@ -1,7 +1,7 @@
 import java.awt.*;
 
 /**
- * An class used for modelling a car's structure as well as its driving behaviours.
+ * A class used for modelling a vehicle's structure as well as its driving behaviours.
  *
  * @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
  * @version 1.0
