@@ -21,6 +21,28 @@ public class Volvo240 extends Vehicle {
     }
 
     /**
+     * Constructs a new Volvo240 for the given parameters.
+     *
+     * @param nrDoors an int representing the number of doors of the car
+     * @param enginePower a double representing the engine power of the car
+     * @param currentSpeed a double depicting the current speed of the car
+     * @param color a Color object representing the color of the car
+     * @param modelName a String containing the model name of the car
+     * @param direction an int that keeps track of the direction of the car, in degrees. The car
+     *                  can point in four directions: 0 degrees (East), 90 degrees (North),
+     *                  180 degrees (West) and 270 degrees (South).
+     * @param xPosition a double that keeps track of the x position of the car
+     * @param yPosition a double that keeps track of the y position of the car
+     * @param weight    a double that represents the weight of the car
+     */
+    public Volvo240(int nrDoors, double enginePower, double currentSpeed, Color color,
+                  String modelName, int direction, double xPosition, double yPosition,
+                  double weight){
+        super(nrDoors, enginePower, currentSpeed, color, modelName, direction, xPosition,
+                yPosition, weight);
+    }
+
+    /**
      * calculates the speed factor.
      * Speed factor is used to determine the new speed when using the methods
      * incrementSpeed and decrementSpeed.

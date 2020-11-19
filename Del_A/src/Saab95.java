@@ -15,10 +15,34 @@ public class Saab95 extends Vehicle {
     private boolean turboOn;
 
     /**
-     *  constructs the car Saab95 by calling the super constructor in Cars.
+     *  Default constructor for the car Saab95. Implemented by calling the super constructor in Cars.
      */
     public Saab95(){
         super(2, 125.0, 0.0, Color.red, "Saab95", 90, 0.0, 0.0, 2000);
+        turboOn = false;
+    }
+
+    /**
+     * Constructs a new Saab95 for the given parameters.
+     *
+     * @param nrDoors an int representing the number of doors of the car
+     * @param enginePower a double representing the engine power of the car
+     * @param currentSpeed a double depicting the current speed of the car
+     * @param color a Color object representing the color of the car
+     * @param modelName a String containing the model name of the car
+     * @param direction an int that keeps track of the direction of the car, in degrees. The car
+     *                  can point in four directions: 0 degrees (East), 90 degrees (North),
+     *                  180 degrees (West) and 270 degrees (South).
+     * @param xPosition a double that keeps track of the x position of the car
+     * @param yPosition a double that keeps track of the y position of the car
+     * @param weight    a double that represents the weight of the car
+     */
+    public Saab95(int nrDoors, double enginePower, double currentSpeed, Color color,
+                  String modelName, int direction, double xPosition, double yPosition,
+                  double weight){
+
+        super(nrDoors, enginePower, currentSpeed, color, modelName, direction, xPosition,
+              yPosition, weight);
         turboOn = false;
     }
 

@@ -34,23 +34,8 @@ public class TestScania {
     @Test
     public void testMoveWithTruckbedUp(){
         scan.increaseTruckBedAngle(10);
-        //System.out.println(scan.getTruckBedAngle());
         scan.startEngine();
-        //System.out.println(scan.getCurrentSpeed());
         assertTrue(scan.getCurrentSpeed() == 0.0);
-
-        /*
-        TODO override startEngine i truck, så den inte startar med flak uppfällt, nu finns bara startEngine i Vehicle
-
-        @Override
-        public void startEngine(){
-            if(truckBedAngle > minAngleTruckBed){
-                System.out.println("You can't drive while having the truck bed raised");
-                }
-            else{ super.startEngine(); }
-        }
-         */
-
 
     }
     @Test

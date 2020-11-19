@@ -8,6 +8,7 @@ public class CarTransport{
     private Loader<Vehicle, Truck> cargo;
     private ArrayList<Vehicle> listOfVehicles;
     private int maxCapacity;
+    private double cargoWeightLimit;
     private double proximityThreshold;
     //private boolean rampOpen;
 
@@ -19,17 +20,20 @@ public class CarTransport{
         maxCapacity = 10;
         cargo = new Loader<Vehicle, Truck>(listOfVehicles, maxCapacity);
         proximityThreshold = 0.1;
+        cargoWeightLimit = 3000;
     }
 
+    // TODO lägg till cargoWeightLimit
     public CarTransport(int nrDoors, double enginePower, double currentSpeed,
                         Color color, String modelName, int direction,
                         double xPosition, double yPosition, double weight,
-                        int minAngle, int maxAngle, int maxCapacity){
+                        int minAngle, int maxAngle, int maxCapacity, double cargoWeightLimit){
         truck = new Truck(nrDoors, enginePower, currentSpeed, color, modelName, direction,
                           xPosition, yPosition, weight, minAngle, maxAngle);
         listOfVehicles = new ArrayList<>();
         this.maxCapacity = maxCapacity;
         cargo = new Loader<Vehicle, Truck>(listOfVehicles, this.maxCapacity);
+        this.cargoWeightLimit = cargoWeightLimit;
     }
 
     public int getNrDoors(){
@@ -57,6 +61,14 @@ public class CarTransport{
     public int getDirection(){return truck.getDirection();}
     public double getxPosition(){return truck.getxPosition();}
     public double getyPosition(){return truck.getyPosition();}
+
+    public int getCurrentLoadQuantity(){
+        return listOfVehicles.size();
+    }
+
+    public int getMaxCapacity(){
+        return maxCapacity;
+    }
 
     // TODO vi ska även anropa bilarna/lasten när vi använder oss av move/turnleft
     public void turnLeft(){
@@ -109,15 +121,20 @@ public class CarTransport{
 
     private boolean vehicleCloseEnough(Vehicle vehicle){
         double absDistance = getDistance(vehicle);
-        return absDistance < proximityThreshold;
+        return absDistance <= proximityThreshold;
     }
 
 
-    // TODO
+    // TODO gör om detta lite om vi har tid
     public void load(Vehicle vehicle) {
         if(isRampOpen()){
             if(vehicleCloseEnough(vehicle)){
-                cargo.load(vehicle, truck);
+                if(vehicle.getWeight() < cargoWeightLimit){
+                    cargo.load(vehicle, truck);
+                }
+                else{
+                    System.out.println("The vehicle is too large to load.");
+                }
             }
             else{
                 System.out.println("The vehicle must be closer in order to load it.");
@@ -130,8 +147,9 @@ public class CarTransport{
     }
 
     // TODO
-    public void unload(){
-
+    public Vehicle unload(){
+        Vehicle vehicle = cargo.unload();
+        return vehicle;
     }
 
     public static void main(String [] args){

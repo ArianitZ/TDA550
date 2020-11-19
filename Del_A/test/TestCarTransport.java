@@ -7,16 +7,16 @@ import static org.junit.Assert.assertTrue;
 
 public class TestCarTransport {
 
-    CarTransport transporter = new CarTransport();
-    Saab95 saab = new Saab95();
-    Saab95 saab2 = new Saab95();
-    Vehicle saabHeavy = new Saab95() {
-    };
+    private CarTransport transporter;
+    private Saab95 saab;
+    private Saab95 saab2;
+    private Saab95 heavySaab;
 
     @Before
     public void init() {
         saab = new Saab95();
         saab2 = new Saab95();
+        heavySaab = new Saab95(2, 125.0, 0.0, Color.red, "Saab95", 90, 0.0, 0.0, 5000);
         transporter = new CarTransport();
     }
 
@@ -61,10 +61,7 @@ public class TestCarTransport {
         transporter.load(saab);
         assertTrue(saab.getxPosition() == transporter.getxPosition()
                 && saab.getyPosition() == transporter.getyPosition());
-
-        // TODO ändra CarTransport, vehicleCloseEnough {absDistance <= proximityThreshold;}
-        //  (bara "<" innan) då blien rör sig 0.1 blir det dumt att ha en så liten marginal eller höj gränsen
-    }
+     }
 
     @Test
     public void testMoveWithLoadedCargoAndCopyPositions(){
@@ -82,12 +79,12 @@ public class TestCarTransport {
     @Test
     public void testCargoQuantityLimit(){
         transporter.openRamp();
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < transporter.getMaxCapacity(); i++){
         transporter.load(saab);
         }
-        //transporter.load(saab);
-        //TODO, hur kollar man detta när list är och ska vara privat?
-        // Låta println skriva ut från bortkommenterade raden?
+        transporter.load(saab);
+
+        assertTrue(transporter.getCurrentLoadQuantity() == transporter.getMaxCapacity());
     }
     @Test
     public void testExtractingFromEmptyCargo(){
@@ -95,17 +92,14 @@ public class TestCarTransport {
        // transporter.unload(saab);
        // TODO skriva unloadmetoden
     }
+
     @Test
     public void testLoadWeightLimit(){
-        //TODO if-sats för viktgränsen, nu går det inte att skapa en tyngre Saab/Volvo i klasserna
-        // lägga till konstruktor i Saab så man kan anropa Saab95(2, 125.0, 0.0, Color.red, "Saab95", 90, 0.0, 0.0, 5000000);
         saab.startEngine();
         transporter.openRamp();
         transporter.load(saab);
-        transporter.closeRamp();
-        transporter.startEngine();
-        transporter.move();
-       // assertTrue(saab.getxPosition() != transporter.getxPosition()
-       //         || saab.getyPosition() != transporter.getyPosition());
+        int oldNumberOfVehicles = transporter.getCurrentLoadQuantity();
+        transporter.load(heavySaab);
+        assertTrue(oldNumberOfVehicles == transporter.getCurrentLoadQuantity());
     }
 }

@@ -49,6 +49,14 @@ public class Truck extends Vehicle implements Cargo, Transporter{
     }
 
     @Override
+    public void startEngine(){
+        if(truckBedAngle > minAngleTruckBed){
+            System.out.println("You can't drive while having the truck bed raised");
+        }
+        else{ super.startEngine(); }
+    }
+
+    @Override
     public void move(){
         if(truckBedAngle > minAngleTruckBed){
             System.out.println("You can't drive while having the truck bed raised");
