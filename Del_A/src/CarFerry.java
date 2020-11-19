@@ -20,7 +20,7 @@ public class CarFerry<C extends Vehicle> {
     }
 
     public C unload(){
-
+        return null;
     }
 
 

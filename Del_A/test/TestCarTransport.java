@@ -18,7 +18,7 @@ public class TestCarTransport {
         saab = new Saab95();
         saab2 = new Saab95();
         heavySaab = new Saab95(2, 125.0, 0.0, Color.red, "Saab95", 90, 0.0, 0.0, 5000);
-        volvo = new Volvo240(2, 125.0, 0.0, Color.red, "Saab95", 90, 0.0, 0.0, 2000);
+        volvo = new Volvo240(2, 125.0, 0.0, Color.red, "Volvo240", 90, 0.0, 0.0, 2000);
         transporter = new CarTransport();
     }
 

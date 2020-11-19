@@ -20,6 +20,9 @@ public class CarRepairShop<V extends Vehicle> implements Transporter{
         repairShop = new Loader<>(listOfCars, maxCapacity);
     }
 
+    public int getCargoQuantity(){
+        return listOfCars.size();
+    }
     public void load(V car) {
         repairShop.load(car);
         synchronizeCargo(this);
@@ -54,26 +57,4 @@ public class CarRepairShop<V extends Vehicle> implements Transporter{
     public int getDirection() {
         return directionOfEntrance;
     }
-
-    public static void main(String []args){
-        CarRepairShop<Saab95> bilVerkstadSaab = new CarRepairShop<>();
-//        CarRepairShop<Volvo240> bilVerkstadVolvo = new CarRepairShop<>();
-//        CarRepairShop<Vehicle> bilVerkstadForAll = new CarRepairShop<>();
-        Saab95 saab = new Saab95();
-        System.out.printf("---Before verkstad-- \n (%f, %f)\n", saab.getxPosition(), saab.getyPosition());
-        bilVerkstadSaab.load(saab);
-
-        System.out.printf("---After verkstad-- \n (%f, %f)\n", saab.getxPosition(), saab.getyPosition());
-
-        Scania truck = new Scania();
-        truck.startEngine();
-        truck.move();
-        bilVerkstadSaab.synchronizeCargo(truck);
-
-        System.out.printf("---After verkstad and scania-- \n (%f, %f)\n", saab.getxPosition(), saab.getyPosition());
-
-//        bilVerkstadVolvo.load(new Volvo240());
-//        bilVerkstadForAll.load(new Scania());
-    }
-
 }
