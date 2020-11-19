@@ -1,16 +1,21 @@
 import org.junit.Before;
 import org.junit.Test;
+
+import java.awt.*;
+
 import static org.junit.Assert.assertTrue;
 
 
 public class TestVehicleEngine {
 
     private Vehicle saab;
+    private Vehicle vehicle;
 
 
     @Before
     public void init(){
         saab = new Saab95();
+        vehicle = new Vehicle(4, 125.0, 0.0, Color.red, "Saab95", 90, 0.0, 0.0, 2000);
     }
 
     @Test
@@ -80,6 +85,11 @@ public class TestVehicleEngine {
         saab.brake(-1);
         double newSpeed = saab.getCurrentSpeed();
         assertTrue(newSpeed == oldSpeed);
+    }
+
+    @Test
+    public void TestSpeedfactor(){
+        assertTrue(vehicle.speedFactor()==vehicle.getEnginePower()*0.01);
     }
 
 }
