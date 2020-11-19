@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class CarTransport{
 
@@ -10,9 +9,7 @@ public class CarTransport{
     private int maxCapacity;
     private double cargoWeightLimit;
     private double proximityThreshold;
-    //private boolean rampOpen;
 
-    // TODO change min/max truck bed angle
     public CarTransport(){
         truck = new Truck(2, 100.0, 0.0, Color.blue, "Truck", 90, 0.0, 0.0,
                           10000.0, 0, 45);
@@ -23,7 +20,6 @@ public class CarTransport{
         cargoWeightLimit = 3000;
     }
 
-    // TODO lägg till cargoWeightLimit
     public CarTransport(int nrDoors, double enginePower, double currentSpeed,
                         Color color, String modelName, int direction,
                         double xPosition, double yPosition, double weight,
@@ -49,7 +45,6 @@ public class CarTransport{
         return truck.getColor();
     }
     public void setColor(Color clr){ truck.setColor(clr); }
-    // TODO ska vi returnera lastbilens nuvarande vikt (dvs vikten på lastbilen + alla bilar)
     public double getWeight(){ return truck.getWeight();}
     public void startEngine(){ truck.startEngine(); }
     public double speedFactor(){return getEnginePower()*0.01;}
@@ -70,7 +65,6 @@ public class CarTransport{
         return maxCapacity;
     }
 
-    // TODO vi ska även anropa bilarna/lasten när vi använder oss av move/turnleft
     public void turnLeft(){
         truck.turnLeft();
         synchronizeCargo();
@@ -93,7 +87,7 @@ public class CarTransport{
             vehicle.setDirection(truck.getDirection());
         }
     }
-    // TODO add conditions
+
     public void openRamp(){
         if(truck.getCurrentSpeed() == 0.0){
             truck.increaseTruckBedAngle(truck.getMaxAngleTruckBed());
@@ -103,7 +97,6 @@ public class CarTransport{
         }
     }
 
-    // TODO add conditions
     public void closeRamp(){
         truck.decreaseTruckBedAngle(truck.getMaxAngleTruckBed());
     }
@@ -124,7 +117,6 @@ public class CarTransport{
         return absDistance <= proximityThreshold;
     }
 
-
     // TODO gör om detta lite om vi har tid
     public void load(Vehicle vehicle) {
         if(isRampOpen()){
@@ -143,63 +135,29 @@ public class CarTransport{
         else{
             System.out.println("Ramp must be down in order to load the car.");
         }
-
     }
 
-    // TODO
+    // TODO if list is empty it returns null
     public Vehicle unload(){
         Vehicle vehicle = cargo.unload();
+        try {
+            vehicle.setxPosition(truck.getxPosition()-0.1);
+            vehicle.setyPosition(truck.getyPosition()-0.1);
+        } catch (NullPointerException e){
+            System.out.println("Nothing to unload");
+        }
+
         return vehicle;
-    }
-
-    public static void main(String [] args){
-        CarTransport transporter = new CarTransport();
-        Saab95 saab = new Saab95();
-        saab.startEngine();
-        transporter.startEngine();
-
-        for(int i = 0; i < 10; i++){
-            transporter.move();
-            saab.move();
-        }
-        saab.move();
-        saab.turnLeft();
-        transporter.stopEngine();
-        transporter.openRamp();
-
-        System.out.println("---------------Before loading-----------------");
-        System.out.println(saab.getyPosition());
-        System.out.println(saab.getDirection());
-        System.out.println(transporter.getyPosition());
-
-        transporter.load(saab);
-
-        System.out.println("---------------After loading-----------------");
-        System.out.println(saab.getyPosition());
-        System.out.println(saab.getDirection());
-        System.out.println(transporter.getyPosition());
-        System.out.println(transporter.getDirection());
-        transporter.closeRamp();
-        transporter.startEngine();
-        for(int i = 0; i < 10; i++){
-            transporter.move();
-            if(i%3 == 0){
-                transporter.turnRight();
-            }
-            System.out.printf("Saab: (%f, %f)\t Transporter: (%f, %f)\n",saab.getxPosition(),
-                               saab.getyPosition(), transporter.getxPosition(), transporter.getyPosition());
-        }
-        System.out.println(transporter.getCurrentSpeed());
-        transporter.openRamp();
-
     }
 
     public void setxPosition(double newxPosition) {
         truck.setxPosition(newxPosition);
+        synchronizeCargo();
     }
 
     public void setyPosition(double newyPosition) {
         truck.setyPosition(newyPosition);
+        synchronizeCargo();
     }
 }
 
