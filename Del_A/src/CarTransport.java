@@ -4,11 +4,11 @@ import java.util.ArrayList;
 public class CarTransport<V extends Vehicle>{
 
     // TODO ändra namnet på Loader<V> cargo till Loader<V> loader
-    private Truck truck;
-    private Loader<V> cargo;
-    private ArrayList<V> listOfVehicles;
-    private int maxCapacity;
-    private double cargoWeightLimit;
+    private final Truck truck;
+    private final Loader<V> cargo;
+    private final ArrayList<V> listOfVehicles;
+    private final int maxCapacity;
+    private final double cargoWeightLimit;
     private double proximityThreshold;
 
     public CarTransport(){
@@ -142,20 +142,9 @@ public class CarTransport<V extends Vehicle>{
             vehicle.setxPosition(truck.getxPosition()-0.1);
             vehicle.setyPosition(truck.getyPosition()-0.1);
         } catch (NullPointerException e){
-            System.out.println("Nothing to unload");
         }
 
         return vehicle;
-    }
-
-    public void setxPosition(double newxPosition) {
-        truck.setxPosition(newxPosition);
-        synchronizeCargo();
-    }
-
-    public void setyPosition(double newyPosition) {
-        truck.setyPosition(newyPosition);
-        synchronizeCargo();
     }
 }
 

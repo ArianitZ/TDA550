@@ -2,9 +2,7 @@ import java.awt.*;
 
 public class Truck extends Vehicle{
 
-    private int truckBedAngle;
-    private int maxAngleTruckBed;
-    private int minAngleTruckBed;
+    private Ramp truckBed;
 
     // TODO change engine power
     public Truck(int nrDoors, double enginePower, double currentSpeed,
@@ -13,44 +11,32 @@ public class Truck extends Vehicle{
                  int minAngleTruckBed, int maxAngleTruckBed){
         super(nrDoors, enginePower, currentSpeed, color, modelName, direction,
                 xPosition, yPosition, weight);
-        truckBedAngle = 0;
-        this.maxAngleTruckBed = maxAngleTruckBed;
-        this.minAngleTruckBed = minAngleTruckBed;
+        truckBed = new Ramp(maxAngleTruckBed, minAngleTruckBed);
     }
 
-    public int getTruckBedAngle() {return truckBedAngle;}
-
-    private void setTruckBedAngle(int newAngle) {truckBedAngle = newAngle;}
-
     // TODO change this so that cars are not slower than trucks
+    @Override
     public double speedFactor(){
         return getEnginePower()*0.01;
     }
 
-    public int getMaxAngleTruckBed() { return maxAngleTruckBed;}
+    public int getTruckBedAngle() {return truckBed.getTruckBedAngle();}
 
-    public int getMinAngleTruckBed() { return minAngleTruckBed;}
+    public int getMaxAngleTruckBed() { return truckBed.getMaxAngleTruckBed();}
+
+    public int getMinAngleTruckBed() { return truckBed.getMinAngleTruckBed();}
 
     public void increaseTruckBedAngle(int amount){
-        if (getCurrentSpeed() == 0.0) {
-            int newAngle = getTruckBedAngle() + amount;
-            newAngle = (newAngle < maxAngleTruckBed) ? newAngle : maxAngleTruckBed;
-            setTruckBedAngle(newAngle);
-        }
-        else{
-            System.out.println("You can't increase the truck bed angle while moving!");
-        }
+        truckBed.increaseTruckBedAngle(amount, this.getCurrentSpeed());
     }
     
     public void decreaseTruckBedAngle(int amount){
-        int newAngle = getTruckBedAngle() - amount;
-        newAngle = (newAngle > minAngleTruckBed) ? newAngle: minAngleTruckBed;
-        setTruckBedAngle(newAngle);
+        truckBed.decreaseTruckBedAngle(amount);
     }
 
     @Override
     public void startEngine(){
-        if(truckBedAngle > minAngleTruckBed){
+        if(truckBed.getTruckBedAngle() > truckBed.getMinAngleTruckBed()){
             System.out.println("You can't drive while having the truck bed raised");
         }
         else{ super.startEngine(); }
@@ -58,7 +44,7 @@ public class Truck extends Vehicle{
 
     @Override
     public void move(){
-        if(truckBedAngle > minAngleTruckBed){
+        if(truckBed.getTruckBedAngle() > truckBed.getMinAngleTruckBed()){
             System.out.println("You can't drive while having the truck bed raised");
         }
         else{

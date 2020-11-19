@@ -7,8 +7,9 @@ import static org.junit.Assert.*;
 
 public class TestCarTransport {
 
-    private CarTransport transporter;
-    private CarTransport truck;
+
+    private CarTransport<Vehicle> transporter;
+    private CarTransport<Vehicle> truck;
     private Saab95 saab;
     private Saab95 saab2;
     private Saab95 heavySaab;
@@ -29,6 +30,13 @@ public class TestCarTransport {
     public void testOpenRamp() {
         truck.openRamp();
         assertTrue(truck.isRampOpen());
+    }
+
+    @Test
+    public void testOpenRampWhileMoving(){
+        transporter.startEngine();
+        transporter.openRamp();
+        assertTrue(!transporter.isRampOpen());
     }
 
     @Test
@@ -130,18 +138,6 @@ public class TestCarTransport {
         transporter.startEngine();
         transporter.openRamp();
         assertFalse(transporter.isRampOpen());
-    }
-
-    @Test
-    public void TestsetxPosition(){
-        transporter.setxPosition(1.0);
-        assertTrue(transporter.getxPosition()==1.0);
-    }
-
-    @Test
-    public void TestsetyPosition(){
-        transporter.setyPosition(1.0);
-        assertTrue(transporter.getyPosition()==1.0);
     }
 
     @Test
