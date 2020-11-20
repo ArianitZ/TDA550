@@ -10,9 +10,7 @@ public class TestCarFerry {
     private Vehicle seaBasedVehicle;
     private Vehicle volvo;
     private Vehicle scania;
-
     private Saab95 saab;
-    private Saab95 heavySaab;
 
     @Before
     public void init(){
@@ -22,86 +20,6 @@ public class TestCarFerry {
         volvo = new Volvo240();
         scania = new Scania();
         saab = new Saab95();
-        heavySaab = new Saab95(2, 125.0, 0.0, Color.red, "Saab95", 90, 0.0, 0.0, 5000);
-    }
-
-
-    @Test
-    public void TestStartEngineOpenRamp(){
-        ferry.openRamp();
-        ferry.startEngine();
-        assertTrue(ferry.getCurrentSpeed() == 0.0);
-    }
-
-    @Test
-    public void TestRamp(){
-        ferry.openRamp();
-        ferry.closeRamp();
-        assertFalse(ferry.isRampOpen());
-    }
-
-    @Test
-    public void TestgetCurrentLoadQuantity(){
-        ferry.openRamp();
-        ferry.load(volvo);
-        assertTrue(ferry.getCurrentLoadQuantity() == 1);
-    }
-
-    @Test
-    public void TestgetMaxCapacity(){
-        assertTrue(ferry.getMaxCapacity() == 30);
-    }
-
-    @Test
-    public void TestFerryTurnLeft(){
-        ferry.turnLeft();
-        assertTrue(ferry.getDirection() == 180);
-    }
-
-    @Test
-    public void TestFerryTurnRight(){
-        ferry.turnRight();
-        assertTrue(ferry.getDirection() == 0);
-    }
-
-    @Test
-    public void TestFerryMove(){
-        double xPosition = ferry.getxPosition();
-        double yPosition = ferry.getyPosition();
-        ferry.startEngine();
-        ferry.move();
-        assertTrue(xPosition == ferry.getxPosition() && yPosition < ferry.getyPosition());
-    }
-
-    @Test
-    public void TestFerryLoadRampOpen(){
-        ferry.load(volvo);
-        assertTrue(ferry.getCurrentLoadQuantity() == 0);
-    }
-
-    @Test
-    public void TestFerryLoadCloseEnough(){
-        volvo.startEngine();
-        volvo.move();
-        volvo.move();
-        ferry.openRamp();
-        ferry.load(volvo);
-        assertTrue(ferry.getCurrentLoadQuantity() == 0);
-    }
-
-    @Test
-    public void TestFerryLoadCargoNotToHeavy(){
-        ferry.openRamp();
-        ferry.load(scania);
-        assertTrue(ferry.getCurrentLoadQuantity() == 0);
-    }
-
-    @Test
-    public void TestFerryUnload(){
-        ferry.openRamp();
-        ferry.load(volvo);
-        ferry.unload();
-        assertTrue(ferry.getCurrentLoadQuantity() == 0);
     }
 
     @Test
@@ -139,11 +57,22 @@ public class TestCarFerry {
         assertTrue(ferry.speedFactor() == ferry.getEnginePower()*0.01);
     }
 
+
     @Test
-    public void TestStopEngineFerry(){
+    public void testStartEngine(){
         ferry.startEngine();
+        assertTrue(ferry.getCurrentSpeed() == 0.1);
+    }
+
+    @Test
+    public void testStopEngine(){
+        ferry.startEngine();
+        ferry.gas(0.5);
+        ferry.move();
+        ferry.brake(0.6);
+        ferry.move();
         ferry.stopEngine();
-        assertTrue(ferry.getCurrentSpeed() == 0.0);
+        assertTrue(ferry.getCurrentSpeed() == 0);
     }
 
     @Test
@@ -164,6 +93,34 @@ public class TestCarFerry {
     }
 
     @Test
+    public void TestgetCurrentLoadQuantity(){
+        ferry.openRamp();
+        ferry.load(volvo);
+        assertTrue(ferry.getCurrentLoadQuantity() == 1);
+    }
+
+    @Test
+    public void TestgetMaxCapacity(){
+        assertTrue(ferry.getMaxCapacity() == 30);
+    }
+
+    @Test
+    public void testMaxlimitCargo(){
+        ferry.openRamp();
+        for(int i = 0; i < 35; i++) {
+            ferry.load(saab);
+        }
+        assertTrue(ferry.getCurrentLoadQuantity() == ferry.getMaxCapacity());
+    }
+
+    @Test
+    public void TestFerryLoadCargoNotToHeavy(){
+        ferry.openRamp();
+        ferry.load(scania);
+        assertTrue(ferry.getCurrentLoadQuantity() == 0);
+    }
+
+    @Test
     public void TestGetDirectionFerry(){
         assertTrue(ferry.getDirection()==90);
     }
@@ -179,48 +136,24 @@ public class TestCarFerry {
     }
 
     @Test
-    public void testStartEngine(){
-        ferry.startEngine();
-        assertTrue(ferry.getCurrentSpeed() == 0.1);
+    public void TestFerryTurnLeft(){
+        ferry.turnLeft();
+        assertTrue(ferry.getDirection() == 180);
     }
-    @Test
-    public void testStopEngine(){
-        ferry.startEngine();
-        ferry.gas(0.5);
-        ferry.move();
-        ferry.brake(0.6);
-        ferry.move();
-        ferry.stopEngine();
-        assertTrue(ferry.getCurrentSpeed() == 0);
-    }
-    @Test
-    public void testOpenRamp(){
-        ferry.openRamp();
-        assertTrue(ferry.isRampOpen());
-    }
-    @Test
-    public void testOpenRampWhileMoving(){
-        ferry.startEngine();
-        ferry.openRamp();
-        assertTrue(!ferry.isRampOpen());
 
-    }
     @Test
-    public void testStartWithRampOpen(){
-        ferry.openRamp();
+    public void TestFerryTurnRight(){
+        ferry.turnRight();
+        assertTrue(ferry.getDirection() == 0);
+    }
+
+    @Test
+    public void TestFerryMove(){
+        double xPosition = ferry.getxPosition();
+        double yPosition = ferry.getyPosition();
         ferry.startEngine();
-        assertTrue(ferry.getCurrentSpeed() == 0);
-    }
-    @Test
-    public void testCloseRamp(){
-        ferry.openRamp();
-        ferry.closeRamp();
-        assertTrue(!ferry.isRampOpen());
-    }
-    @Test
-    public void testLoadWithRampClosed(){
-        ferry.load(saab);
-        assertTrue(ferry.getCurrentLoadQuantity() == 0);
+        ferry.move();
+        assertTrue(xPosition == ferry.getxPosition() && yPosition < ferry.getyPosition());
     }
 
     @Test
@@ -234,14 +167,6 @@ public class TestCarFerry {
         assertTrue(ferry.getxPosition() == -0.1
                 && ferry.getyPosition() == 0.2
                 && ferry.getDirection() == 90);
-    }
-    @Test
-    public void testLoadCars(){
-        ferry.openRamp();
-        ferry.load(saab);
-        ferry.load(saab);
-        ferry.closeRamp();
-        assertTrue(ferry.getCurrentLoadQuantity() == 2);
     }
 
     @Test
@@ -264,29 +189,22 @@ public class TestCarFerry {
         ferry.openRamp();
         ferry.load(saab);
         assertTrue(ferry.getCurrentLoadQuantity() == 0);
-}
+    }
     @Test
-    public void testLoadToHeavySaab(){
+    public void testLoadCars(){
         ferry.openRamp();
-        ferry.load(heavySaab);
-        assertTrue(ferry.getCurrentLoadQuantity() == 0);
-}
-    @Test
-    public void testMaxlimitCargo(){
-        ferry.openRamp();
-        for(int i = 0; i < 35; i++) {
-            ferry.load(saab);
-        }
-        assertTrue(ferry.getCurrentLoadQuantity() == ferry.getMaxCapacity());
+        ferry.load(saab);
+        ferry.load(saab);
+        ferry.closeRamp();
+        assertTrue(ferry.getCurrentLoadQuantity() == 2);
     }
 
     @Test
-    public void testGetColorSetColorNrDoorsEnignepowerWeight(){
-        ferry.setColor(Color.blue);
-        assertTrue(ferry.getColor() == Color.blue);
-        assertTrue(ferry.getNrDoors() == 2);
-        assertTrue(ferry.getEnginePower() == 1000);
-        assertTrue(ferry.getWeight()== 20000);
+    public void TestFerryUnload(){
+        ferry.openRamp();
+        ferry.load(volvo);
+        ferry.unload();
+        assertTrue(ferry.getCurrentLoadQuantity() == 0);
     }
 
     @Test
@@ -297,7 +215,7 @@ public class TestCarFerry {
         //ferry.unload();
         // TODO catch (StackEmptyException e) i CarFerry?
         assertTrue(ferry.getCurrentLoadQuantity() == 0);
-}
+    }
     @Test
     public void testUnloadCarsInRightOrder(){
         ferry.openRamp();
