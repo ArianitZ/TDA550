@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
  /**
@@ -28,6 +29,10 @@ public class Loader<C extends Cargo> implements Loadable<C>{
     public Loader(List<C> list, int maxCapacity){
         this.list = list;
         this.maxCapacity = maxCapacity;
+    }
+
+    public List<C> getCargoList(){
+        return list;
     }
 
      /**
@@ -77,5 +82,4 @@ public class Loader<C extends Cargo> implements Loadable<C>{
 
         }
     }
-
 }

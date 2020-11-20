@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -84,8 +86,6 @@ public class CarFerry<C extends Vehicle> implements SeaBasedVehicle{
     public int getDirection(){return seaBasedVehicle.getDirection();}
     public double getxPosition(){return seaBasedVehicle.getxPosition();}
     public double getyPosition(){return seaBasedVehicle.getyPosition();}
-
-
     /**
      * Starts the engine unless the ramp is open.
      */
@@ -238,5 +238,4 @@ public class CarFerry<C extends Vehicle> implements SeaBasedVehicle{
         }
         return vehicle;
     }
-
 }

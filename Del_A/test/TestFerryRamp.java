@@ -29,6 +29,12 @@ public class TestFerryRamp {
     }
 
     @Test
+    public void testLoadWhitClosedRamp(){
+        ferry.load(volvo);
+        assertTrue(ferry.getCurrentLoadQuantity() == 0);
+    }
+
+    @Test
     public void testOpenRampWhileMoving(){
         ferry.startEngine();
         ferry.openRamp();

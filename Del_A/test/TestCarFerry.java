@@ -35,6 +35,9 @@ public class TestCarFerry {
     public void TestGetCurrentSpeedFerry(){
         assertTrue(ferry.getCurrentSpeed() == 0.0);
     }
+    // TODO radera
+    //  public double speedFactor(){return seaBasedVehicle.speedFactor();}
+    //  ur CarFerry, änvänds väl inte?
 
     @Test
     public void TestGetColorFerry(){
@@ -221,12 +224,6 @@ public class TestCarFerry {
         ferry.openRamp();
         ferry.load(saab);
         ferry.load(volvo);
-        ferry.unload();
-        //TODO, hur kollar vi att volvon är kvar?
-        // Eller att saaben blivit utlastad?
-
+        assertTrue(ferry.unload().equals(volvo));
     }
-    // TODO radera
-    //  public double speedFactor(){return seaBasedVehicle.speedFactor();}
-    //  ur CarFerry, änvänds väl inte?
 }
