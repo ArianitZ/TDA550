@@ -31,10 +31,6 @@ public class Loader<C extends Cargo> implements Loadable<C>{
         this.maxCapacity = maxCapacity;
     }
 
-    public List<C> getCargoList(){
-        return list;
-    }
-
      /**
       * Override of the load function from the loadable. Loads cargo in sequential order.
       * @param c the cargo to be added
