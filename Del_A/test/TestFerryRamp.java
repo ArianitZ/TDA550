@@ -54,8 +54,4 @@ public class TestFerryRamp {
         ferry.load(volvo);
         assertTrue(ferry.getCurrentLoadQuantity() == 1);
     }
-
-
-
-
 }
