@@ -239,6 +239,14 @@ public class CarFerry<C extends Vehicle> implements SeaBasedVehicle{
         return vehicle;
     }
 
+    public static void main(String[] args){
+        CarFerry<Vehicle> ferry = new CarFerry<>();
+        Volvo240 volvo = new Volvo240();
+        ferry.openRamp();
+        System.out.println("-----");
+        System.out.println(ferry.unload()==null);
 
+        System.out.println(ferry.getCurrentLoadQuantity());
+    }
 
 }
