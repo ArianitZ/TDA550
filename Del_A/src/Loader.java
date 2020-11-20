@@ -43,7 +43,6 @@ public class Loader<C extends Cargo> implements Loadable<C>{
         else{
             System.out.println("Loader is full.");
         }
-
     }
 
      /**

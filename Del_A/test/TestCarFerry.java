@@ -35,10 +35,6 @@ public class TestCarFerry {
     public void TestGetCurrentSpeedFerry(){
         assertTrue(ferry.getCurrentSpeed() == 0.0);
     }
-    // TODO radera
-    //  public double speedFactor(){return seaBasedVehicle.speedFactor();}
-    //  ur CarFerry, änvänds väl inte?
-
     @Test
     public void TestGetColorFerry(){
         assertTrue(ferry.getColor().equals(Color.white));
@@ -215,8 +211,7 @@ public class TestCarFerry {
         ferry.openRamp();
         ferry.load(saab);
         ferry.unload();
-        //ferry.unload();
-        // TODO catch (StackEmptyException e) i CarFerry?
+        ferry.unload();
         assertTrue(ferry.getCurrentLoadQuantity() == 0);
     }
     @Test
@@ -224,6 +219,6 @@ public class TestCarFerry {
         ferry.openRamp();
         ferry.load(saab);
         ferry.load(volvo);
-        assertTrue(ferry.unload().equals(volvo));
+        assertTrue(ferry.unload().equals(saab));
     }
 }

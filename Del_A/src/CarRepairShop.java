@@ -12,8 +12,9 @@ public class CarRepairShop<V extends Vehicle> implements Transporter{
     * list that keeps track of loaded vehicles.
     */
     private List<V> listOfCars;
+
     /**
-    * Mmx capacity of the repair shop.
+     *  Max capacity of the repair shop.
     **/
 
     private final int maxCapacity;

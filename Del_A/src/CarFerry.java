@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * A class that represents a car ferry. It is a sea based vehicle.
@@ -21,7 +20,7 @@ public class CarFerry<C extends Vehicle> implements SeaBasedVehicle{
     /**
      * A Stack of Vehicle objects used to represent the cargo of the ferry
      */
-    private Stack<C> cargo;
+    private List<C> cargo;
 
     /**
      * The maximum number of vehicles on the cargo
@@ -55,7 +54,7 @@ public class CarFerry<C extends Vehicle> implements SeaBasedVehicle{
     public CarFerry(){
         seaBasedVehicle = new Vehicle(2,1000, 0.0, Color.white, "Båten", 90,
                                       0.0, 0.0, 20000);
-        cargo = new Stack<>();
+        cargo = new ArrayList<>();
         maxCapacity = 30;
         loader = new Loader<>(cargo, maxCapacity);
         ramp = new Ramp(90, 0);
@@ -229,13 +228,18 @@ public class CarFerry<C extends Vehicle> implements SeaBasedVehicle{
      * @return the vehicle that was unloaded or null if the ferry is empty
      */
     public C unload(){
-        C vehicle = cargo.pop();
         try {
+            C vehicle = cargo.get(0);
+            cargo.remove(0);
             vehicle.setxPosition(seaBasedVehicle.getxPosition()-0.1);
             vehicle.setyPosition(seaBasedVehicle.getyPosition()-0.1);
+            return vehicle;
         } catch (NullPointerException e){
             System.out.println("Nothing to unload");
         }
-        return vehicle;
+         catch(IndexOutOfBoundsException e){
+             System.out.println("Nothing to unload");
+         }
+        return null;
     }
 }

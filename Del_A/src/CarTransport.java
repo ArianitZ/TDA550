@@ -12,7 +12,6 @@ public class CarTransport<V extends Vehicle>{
      * creates an object truck.
      */
     private final Truck truck;
-
     /**
      * loader of the car transport.
      */
