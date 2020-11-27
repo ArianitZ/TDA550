@@ -81,6 +81,9 @@ public class Vehicle implements Movable, Cargo, Transporter{
         this.weight = weight;
     }
 
+    public String getModelName(){
+        return modelName;
+    }
     /**
      * returns the number of doors that the car has
      *

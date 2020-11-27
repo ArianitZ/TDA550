@@ -55,9 +55,7 @@ public class CarController {
             for (Vehicle car : cars) {
                 checkBoundaryConditions(car);
                 car.move();
-                int x = (int) Math.round(car.getxPosition());
-                int y = (int) Math.round(car.getyPosition());
-                frame.drawPanel.moveit(x, y);
+                frame.drawPanel.moveit(car);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
