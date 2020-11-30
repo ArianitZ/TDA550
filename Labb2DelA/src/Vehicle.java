@@ -172,7 +172,7 @@ public class Vehicle implements Movable, Cargo, Transporter{
      *
      * @param amount a double representing how much one wants to increase the speed of the car
      */
-    public void incrementSpeed(double amount){
+    private void incrementSpeed(double amount){
         double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
         setCurrentSpeed(newSpeed);
     }

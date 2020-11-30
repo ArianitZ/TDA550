@@ -108,12 +108,8 @@ public class Truck extends Vehicle{
             System.out.println("You can't drive while having the truck bed raised");
         }
         else{
-              if (amount <= 1 && amount >= 0){
-                 incrementSpeed(amount);
-              }
-              else{
-                  System.out.println("amount should be between 0 and 1");
-               }
+                 super.gas(amount);
+
         }
     }
 
