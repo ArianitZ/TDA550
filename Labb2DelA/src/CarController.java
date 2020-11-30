@@ -10,7 +10,7 @@ import java.util.ArrayList;
 * modifying the model state and the updating the view.
  */
 
-public class CarController {
+public class CarController{
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
@@ -30,21 +30,23 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        Saab95 saab = new Saab95();
+        Saab95 saab = new Saab95(2, 125.0, 0.0, Color.red, "Saab95", 0, 0.0, 0.0, 2000);
         saab.setyPosition(100.0);
 
-        Scania scania = new Scania();
+        Scania scania = new Scania(2, 100.0, 0.0, Color.blue, "Scania", 0, 0.0, 0.0, 10000, 0, 70);
         scania.setyPosition(200.0);
 
-        cc.cars.add(new Volvo240());
-        cc.cars.add(saab);
-        cc.cars.add(scania);
+
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
 
         // Start the timer
         cc.timer.start();
+
+        cc.cars.add(new Volvo240(4, 100.0, 0.0, Color.black, "Volvo240", 0, 0.0, 0.0, 1500));
+        cc.cars.add(scania);
+        cc.cars.add(saab);
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
@@ -56,7 +58,6 @@ public class CarController {
                 checkBoundaryConditions(car);
                 car.move();
                 frame.drawPanel.moveit(car);
-                // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
 
             }
@@ -76,6 +77,52 @@ public class CarController {
 
         for(Vehicle car: cars){
             car.brake(brake);
+        }
+    }
+//nytt
+    void startEngine(){
+        for(Vehicle car : cars){
+            car.startEngine();
+        }
+    }
+
+    void stopEngine(){
+        for(Vehicle car: cars){
+            car.stopEngine();
+        }
+    }
+
+    void turboOnButton(){
+        for(Vehicle car: cars){
+            if (car instanceof Saab95) {
+                //System.out.println(((Saab95)car).getTurboOn());
+                ((Saab95)car).setTurboOn();
+                //System.out.println(((Saab95)car).getTurboOn());
+            }
+        }
+    }
+
+    void turboOffButton(){
+        for(Vehicle car: cars){
+            if (car instanceof Saab95) {
+                ((Saab95)car).setTurboOff();
+            }
+        }
+    }
+
+    void liftBedButton(){
+        for(Vehicle car: cars){
+            if (car instanceof Truck) {
+                ((Scania)car).increaseTruckBedAngle(30);
+            }
+        }
+    }
+
+    void lowerBedButton(){
+        for(Vehicle car: cars){
+            if (car instanceof Truck) {
+                ((Scania)car).decreaseTruckBedAngle(30);
+            }
         }
     }
 

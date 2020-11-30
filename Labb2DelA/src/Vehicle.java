@@ -84,6 +84,7 @@ public class Vehicle implements Movable, Cargo, Transporter{
     public String getModelName(){
         return modelName;
     }
+
     /**
      * returns the number of doors that the car has
      *
@@ -268,7 +269,7 @@ public class Vehicle implements Movable, Cargo, Transporter{
 
 
     /**
-     *  moves the object if the object's current speed is not 0.
+     *  moves the object if the object's current speed is not 0. (changes the x- and y-position)
      *  Where the object is moved is determined by the value of its direction and current speed.
      */
     public void move(){
