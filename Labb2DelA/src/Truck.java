@@ -89,13 +89,31 @@ public class Truck extends Vehicle{
      * Moves the truck.
      * The truck cant be moved if the truck bed is raised.
      */
+//    @Override
+//    public void move(){
+//        if(truckBed.getRampAngle() > truckBed.getMinAngleRamp()){
+//            System.out.println("You can't drive while having the truck bed raised");
+//        }
+//        else{
+//            super.move();
+//        }
+//    }
+    /*
+    * Overridar gas från vehicle, gjorde även incrementspeed public.
+    * gas() är ju redan det så borde inte spela ngn större roll
+    * */
     @Override
-    public void move(){
+    public void gas(double amount){
         if(truckBed.getRampAngle() > truckBed.getMinAngleRamp()){
             System.out.println("You can't drive while having the truck bed raised");
         }
         else{
-            super.move();
+              if (amount <= 1 && amount >= 0){
+                 incrementSpeed(amount);
+              }
+              else{
+                  System.out.println("amount should be between 0 and 1");
+               }
         }
     }
 

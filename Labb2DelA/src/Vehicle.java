@@ -84,6 +84,7 @@ public class Vehicle implements Movable, Cargo, Transporter{
     public String getModelName(){
         return modelName;
     }
+
     /**
      * returns the number of doors that the car has
      *
@@ -171,7 +172,7 @@ public class Vehicle implements Movable, Cargo, Transporter{
      *
      * @param amount a double representing how much one wants to increase the speed of the car
      */
-    private void incrementSpeed(double amount){
+    public void incrementSpeed(double amount){
         double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
         setCurrentSpeed(newSpeed);
     }
@@ -268,7 +269,7 @@ public class Vehicle implements Movable, Cargo, Transporter{
 
 
     /**
-     *  moves the object if the object's current speed is not 0.
+     *  moves the object if the object's current speed is not 0. (changes the x- and y-position)
      *  Where the object is moved is determined by the value of its direction and current speed.
      */
     public void move(){
