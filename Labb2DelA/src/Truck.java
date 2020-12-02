@@ -86,22 +86,10 @@ public class Truck extends Vehicle{
     }
 
     /**
-     * Moves the truck.
-     * The truck cant be moved if the truck bed is raised.
+     * a method used to accelerate the car by increasing the speed of it by a certain amount
+     * Only accepts values between 0 and 1
+     * @param amount a double representing how much one wants to increase the speed of the car
      */
-//    @Override
-//    public void move(){
-//        if(truckBed.getRampAngle() > truckBed.getMinAngleRamp()){
-//            System.out.println("You can't drive while having the truck bed raised");
-//        }
-//        else{
-//            super.move();
-//        }
-//    }
-    /*
-    * Overridar gas från vehicle, gjorde även incrementspeed public.
-    * gas() är ju redan det så borde inte spela ngn större roll
-    * */
     @Override
     public void gas(double amount){
         if(truckBed.getRampAngle() > truckBed.getMinAngleRamp()){

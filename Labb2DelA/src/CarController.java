@@ -15,6 +15,7 @@ public class CarController{
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
+
     // The timer is started with an listener (see below) that executes the statements
     // each step between delays.
     private Timer timer = new Timer(delay, new TimerListener());
@@ -53,18 +54,18 @@ public class CarController{
     * view to update its images. Change this method to your needs.
     * */
     private class TimerListener implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
+
             for (Vehicle car : cars) {
                 checkBoundaryConditions(car);
                 car.move();
                 frame.drawPanel.moveit(car);
-                frame.drawPanel.repaint();
-
             }
+            frame.drawPanel.repaint();
         }
     }
 
-    // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Vehicle car : cars) {
@@ -79,7 +80,7 @@ public class CarController{
             car.brake(brake);
         }
     }
-//nytt
+
     void startEngine(){
         for(Vehicle car : cars){
             car.startEngine();
@@ -95,9 +96,7 @@ public class CarController{
     void turboOnButton(){
         for(Vehicle car: cars){
             if (car instanceof Saab95) {
-                //System.out.println(((Saab95)car).getTurboOn());
                 ((Saab95)car).setTurboOn();
-                //System.out.println(((Saab95)car).getTurboOn());
             }
         }
     }
@@ -113,7 +112,7 @@ public class CarController{
     void liftBedButton(){
         for(Vehicle car: cars){
             if (car instanceof Truck) {
-                ((Scania)car).increaseTruckBedAngle(30);
+                ((Truck)car).increaseTruckBedAngle(30);
             }
         }
     }
@@ -121,7 +120,7 @@ public class CarController{
     void lowerBedButton(){
         for(Vehicle car: cars){
             if (car instanceof Truck) {
-                ((Scania)car).decreaseTruckBedAngle(30);
+                ((Truck)car).decreaseTruckBedAngle(30);
             }
         }
     }

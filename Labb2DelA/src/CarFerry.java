@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @param <C> only objects of type Vehicle can be loaded
  */
-public class CarFerry<C extends Vehicle> implements SeaBasedVehicle{
+public class CarFerry<C extends Vehicle> {
 
     /**
      * A Loader object used for loading/unloading cargo
