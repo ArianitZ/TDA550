@@ -1,7 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /*
@@ -125,22 +129,33 @@ public class CarController{
         }
     }
 
+
     void checkBoundaryConditions(Vehicle car){
         Dimension size = frame.drawPanel.getSize();
 
+        String S = "pics/"+car.getModelName()+".jpg";
+        BufferedImage IM = null;
+        try {
+            IM = ImageIO.read(CarController.class.getResourceAsStream(S));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int width          = IM.getWidth();
+        int height         = IM.getHeight();
 
-        boolean xMaxCondition = car.getxPosition() > size.width;
+        boolean xMaxCondition = car.getxPosition() > size.width- width;
         boolean xMinCondition = car.getxPosition() < 0;
 
-        boolean yMaxCondition = car.getyPosition() > size.height;
+        boolean yMaxCondition = car.getyPosition() > size.height- height;
         boolean yMinCondition = car.getyPosition() < 0;
 
-        if(xMaxCondition || xMinCondition || yMaxCondition || yMinCondition ){
+        if(xMaxCondition || xMinCondition || yMaxCondition || yMinCondition ) {
             changeVehicleDirection(car);
         }
     }
 
-    void changeVehicleDirection(Vehicle car){
+
+            void changeVehicleDirection(Vehicle car){
         car.turnLeft();
         car.turnLeft();
     }
