@@ -1,0 +1,10 @@
+Vi har tänkt att skapa en klass som får heta CarFactory som ersätter beroendet till konstruktorerna till Volvo240, Saab95 och Scania. På så vis uppnår vi DIP.
+
+Just nu följer inte CarController SRP då den har en mainmetod där allt skapas, den har en direkt kontakt med CarView och updaterar DrawPanel via den samt att den har metoder som är i kontakt med modellen (Vehicle och dess subklasser). 
+
+Vi har därför tänkt införa en ny klass, CarApplication, som ska ha en main metod där vår view samt kontroller skapas.
+
+För att bli av med beroendet mellan CarController och DrawPanel så inför vi ett interface Updateable. Dels för att uppnå DIP då den just nu är beroende av JPanel, men också för att CarController ska ha ett lösare beroende till DrawPanel. Updateable ska bara ha två metoder, move(..) och paint(..).
+
+
+

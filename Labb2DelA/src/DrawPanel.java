@@ -10,7 +10,6 @@ import java.util.List;
 public class DrawPanel extends JPanel{
 
     Map<String, BufferedImage> vehicleImages;
-
     List<Tuple<String, Point>> listOfVehiclePositions;
 
 
