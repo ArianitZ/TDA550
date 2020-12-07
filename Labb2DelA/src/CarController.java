@@ -1,12 +1,7 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -25,38 +20,17 @@ public class CarController{
     private Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
-    CarView frame;
-    // A list of cars, modify if needed
-    ArrayList<Vehicle> cars = new ArrayList<>();
+    Updateable frame;
+    CarModel cars;
 
-    //methods:
-
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-
-        Saab95 saab = new Saab95(2, 125.0, 0.0, Color.red, "Saab95", 0, 0.0, 0.0, 2000);
-        saab.setyPosition(100.0);
-
-        Scania scania = new Scania(2, 100.0, 0.0, Color.blue, "Scania", 0, 0.0, 0.0, 10000, 0, 70);
-        scania.setyPosition(200.0);
-
-
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-        //cc.initComponents();
-        // Start the timer
-        cc.timer.start();
-
-        cc.cars.add(new Volvo240(4, 100.0, 0.0, Color.black, "Volvo240", 0, 0.0, 0.0, 1500));
-        cc.cars.add(scania);
-        cc.cars.add(saab);
+    public CarController(CarModel model){
+        this.cars = model;
     }
 
+    //methods:
     /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
+     * view to update its images. Change this method to your needs.
+     * */
     private class TimerListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
@@ -64,23 +38,15 @@ public class CarController{
             for (Vehicle car : cars) {
                 checkBoundaryConditions(car);
                 car.move();
-                frame.drawPanel.moveit(car);
+                frame.move(car);
             }
-            frame.drawPanel.repaint();
+            frame.paint();
         }
     }
 
-//    public void initComponents(){
-//        frame.gasButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                double gas = ((double) frame.gasAmount) / 100;
-//                for (Vehicle car : cars) {
-//                    car.gas(gas);
-//                }
-//            }
-//        });
-//    }
+    public void startTimer(){
+        this.timer.start();
+    }
 
     void gas(int amount) {
         double gas = ((double) amount) / 100;
@@ -141,19 +107,23 @@ public class CarController{
         }
     }
 
-
     void checkBoundaryConditions(Vehicle car){
-        Dimension size = frame.drawPanel.getSize();
+    //void checkBoundaryConditions(Vehicle car, Dimension size){
+//        Dimension size = frame.drawPanel.getSize();
+//
+//        String S = "pics/"+car.getModelName()+".jpg";
+//        BufferedImage IM = null;
+//        try {
+//            IM = ImageIO.read(CarController.class.getResourceAsStream(S));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        int width          = IM.getWidth();
+//        int height         = IM.getHeight();
 
-        String S = "pics/"+car.getModelName()+".jpg";
-        BufferedImage IM = null;
-        try {
-            IM = ImageIO.read(CarController.class.getResourceAsStream(S));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int width          = IM.getWidth();
-        int height         = IM.getHeight();
+        int width = 0;
+        int height = 0;
+        Dimension size = new Dimension(800,800-240);
 
         boolean xMaxCondition = car.getxPosition() > size.width- width;
         boolean xMinCondition = car.getxPosition() < 0;
@@ -167,7 +137,7 @@ public class CarController{
     }
 
 
-            void changeVehicleDirection(Vehicle car){
+    void changeVehicleDirection(Vehicle car){
         car.turnLeft();
         car.turnLeft();
     }

@@ -7,19 +7,32 @@ import java.util.*;
 import java.util.List;
 
 // This panel represent the animated part of the view with the car images.
-public class DrawPanel extends JPanel{
+public class DrawPanel extends JPanel implements Updateable{
 
     Map<String, BufferedImage> vehicleImages;
     List<Tuple<String, Point>> listOfVehiclePositions;
 
 
-    void moveit(Vehicle car){
+//    void moveit(Vehicle car){
+//        Point vehiclePoint = new Point((int)car.getxPosition(), (int)car.getyPosition());
+//        String vehicleType = car.getModelName();
+//
+//        this.listOfVehiclePositions.add(new Tuple(vehicleType, vehiclePoint));
+//    }
+
+
+    @Override
+    public void move(Vehicle car) {
         Point vehiclePoint = new Point((int)car.getxPosition(), (int)car.getyPosition());
         String vehicleType = car.getModelName();
 
         this.listOfVehiclePositions.add(new Tuple(vehicleType, vehiclePoint));
     }
 
+    @Override
+    public void paint(){
+        this.repaint();
+    }
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
@@ -56,4 +69,5 @@ public class DrawPanel extends JPanel{
                                           vehicle.getSecondMember().y, null);
         }
     }
+
 }
