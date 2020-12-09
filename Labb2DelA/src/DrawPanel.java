@@ -20,7 +20,10 @@ public class DrawPanel extends JPanel implements Updateable{
 //        this.listOfVehiclePositions.add(new Tuple(vehicleType, vehiclePoint));
 //    }
 
-
+    @Override
+    public Point getViewDimensions(){
+        return new Point(this.getSize().height, this.getSize().width);
+    }
     @Override
     public void move(Vehicle car) {
         Point vehiclePoint = new Point((int)car.getxPosition(), (int)car.getyPosition());

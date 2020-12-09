@@ -16,13 +16,16 @@ import java.awt.event.ActionListener;
 public class CarView extends JFrame{
     private static final int X = 800;
     private static final int Y = 800;
+    private static final int Z = 30;
 
     // The controller member
     CarController carC;
 
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
+    DrawPanel drawPanel = new DrawPanel(X, Y-Z-240);
 
     JPanel controlPanel = new JPanel();
+
+    SpeedPanel speedPanel;
 
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
@@ -40,8 +43,9 @@ public class CarView extends JFrame{
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename, CarController cc){
+    public CarView(String framename, CarController cc, SpeedPanel speedPanel){
         this.carC = cc;
+        this.speedPanel = speedPanel;
         initComponents(framename);
     }
 
@@ -53,9 +57,13 @@ public class CarView extends JFrame{
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
+
+        speedPanel.setBounds(0,0,X,Z);
+        speedPanel.setPreferredSize(new Dimension(X,Z));
+        speedPanel.setBackground(Color.red);
+        this.add(speedPanel);
+
         this.add(drawPanel);
-
-
 
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
@@ -79,9 +87,6 @@ public class CarView extends JFrame{
 
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
-
-//        controlPanel.add(turboOnButton, 0);
-//        controlPanel.add(gasButton, 1);
         controlPanel.add(liftBedButton, 2);
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
@@ -108,6 +113,7 @@ public class CarView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.gas(gasAmount);
+                speedPanel.updateSpeed();
             }
         });
 
@@ -115,13 +121,15 @@ public class CarView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.brake(gasAmount);
+                speedPanel.updateSpeed();
             }
         });
-//nytt
+
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.startEngine();
+                speedPanel.updateSpeed();
             }
         });
 
@@ -129,6 +137,7 @@ public class CarView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.stopEngine();
+                speedPanel.updateSpeed();
             }
         });
 
