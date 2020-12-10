@@ -14,18 +14,21 @@ import java.awt.event.ActionListener;
  **/
 
 public class CarView extends JFrame{
-    private static final int X = 800;
-    private static final int Y = 800;
+    private static final int X = 1000;
+    private static final int Y = 1000;
     private static final int Z = 30;
+
 
     // The controller member
     CarController carC;
 
-    DrawPanel drawPanel = new DrawPanel(X, Y-Z-240);
+    DrawPanel drawPanel = new DrawPanel(X, Y-2*Z-240);
 
     JPanel controlPanel = new JPanel();
 
     SpeedPanel speedPanel;
+
+    AddCarPanel addCarPanel;
 
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
@@ -42,12 +45,16 @@ public class CarView extends JFrame{
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
+
     // Constructor
-    public CarView(String framename, CarController cc, SpeedPanel speedPanel){
+    public CarView(String framename, CarController cc, SpeedPanel speedPanel, AddCarPanel addCarPanel){
         this.carC = cc;
         this.speedPanel = speedPanel;
+        this.addCarPanel = addCarPanel;
+
         initComponents(framename);
     }
+
 
     // Sets everything in place and fits everything
     // TODO: Take a good look and make sure you understand how these methods and components work
@@ -62,6 +69,10 @@ public class CarView extends JFrame{
         speedPanel.setPreferredSize(new Dimension(X,Z));
         speedPanel.setBackground(Color.red);
         this.add(speedPanel);
+
+        addCarPanel.setBounds(0, Z, X, Z);
+        addCarPanel.setPreferredSize(new Dimension(X,Z));
+        this.add(addCarPanel);
 
         this.add(drawPanel);
 

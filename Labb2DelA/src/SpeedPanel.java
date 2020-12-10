@@ -1,19 +1,22 @@
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SpeedPanel extends JPanel {
 
-    List<JLabel> labelList;
-    CarModel carModel;
+    private List<JLabel> labelList;
+    private CarModel carModel;
+    private int numberOfCars;
+
 
     public SpeedPanel(CarModel carModel){
         this.carModel = carModel;
+        this.numberOfCars = carModel.getNumberOfCars();
         this.labelList = new ArrayList<>();
 
         initializeComponents();
     }
+
 
     // TODO gör så att det är kompatibelt med den senare uppgiften
     private void initializeComponents(){
@@ -29,14 +32,27 @@ public class SpeedPanel extends JPanel {
         initializePanel();
     }
 
+
     private void initializePanel(){
         for(JLabel label : labelList){
             this.add(label);
         }
     }
 
+    private void synchronizeLabelList(){
+        labelList = new ArrayList<>();
+        initializeComponents();
+        this.numberOfCars = carModel.getNumberOfCars();
+        System.out.printf("Synchronize label list. Cars: %d \t List size: %d\n", numberOfCars, labelList.size());
+    }
+
+
     public void updateSpeed(){
-        //this.paintComponent(this.getGraphics());
+        this.repaint();
+
+        if(numberOfCars != carModel.getNumberOfCars()){
+            synchronizeLabelList();
+        }
 
         int ix = 0;
         for(Vehicle car: carModel){
