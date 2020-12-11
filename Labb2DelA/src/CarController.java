@@ -5,17 +5,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
+/**
+ *  A class that controls the buttons of the CarView as well as the animated part of an UpdateablePanel object.
+ *
+ * @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
+ * @version 1.0
+ */
 public class CarController{
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 20;
+    private final int delay = 50;
 
-    // The timer is started with an listener (see below) that executes the statements
-    // each step between delays.
     private Timer timer = new Timer(delay, new TimerListener());
 
-    Updateable frame;
-    CarModel cars;
+    protected UpdateablePanel frame;
+    private CarModel cars;
 
 
     public CarController(CarModel model){
@@ -35,37 +37,43 @@ public class CarController{
         }
     }
 
+
     public void startTimer(){
         this.timer.start();
     }
 
-    void gas(int amount) {
+
+    protected void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Vehicle car : cars) {
             car.gas(gas);
         }
     }
 
-    void brake(int amount){
+
+    protected void brake(int amount){
         double brake = ((double) amount) / 100;
         for(Vehicle car: cars) {
             car.brake(brake);
         }
     }
 
-    void startEngine(){
+
+    protected void startEngine(){
         for(Vehicle car : cars){
             car.startEngine();
         }
     }
 
-    void stopEngine(){
+
+    protected void stopEngine(){
         for(Vehicle car: cars){
             car.stopEngine();
         }
     }
 
-    void turboOnButton(){
+
+    protected void turboOnButton(){
         for(Vehicle car: cars){
             if (car instanceof Saab95) {
                 ((Saab95)car).setTurboOn();
@@ -73,7 +81,8 @@ public class CarController{
         }
     }
 
-    void turboOffButton(){
+
+    protected void turboOffButton(){
         for(Vehicle car: cars){
             if (car instanceof Saab95) {
                 ((Saab95)car).setTurboOff();
@@ -81,7 +90,8 @@ public class CarController{
         }
     }
 
-    void liftBedButton(){
+
+    protected void liftBedButton(){
         for(Vehicle car: cars){
             if (car instanceof Truck) {
                 ((Truck)car).increaseTruckBedAngle(30);
@@ -89,13 +99,15 @@ public class CarController{
         }
     }
 
-    public void lowerBedButton(){
+
+    protected void lowerBedButton(){
         for(Vehicle car: cars){
             if (car instanceof Truck) {
                 ((Truck)car).decreaseTruckBedAngle(30);
             }
         }
     }
+
 
     private void checkBoundaryConditions(Vehicle car){
         Point sizeOfFrame = frame.getViewDimensions();
@@ -112,9 +124,11 @@ public class CarController{
         }
     }
 
+
     private Point getImageSize(Vehicle car){
         String S = "pics/"+car.getModelName()+".jpg";
         BufferedImage IM = null;
+
         try {
             IM = ImageIO.read(CarController.class.getResourceAsStream(S));
         } catch (IOException e) {

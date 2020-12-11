@@ -4,7 +4,7 @@ Just nu följer inte CarController SRP då den har en mainmetod där allt skapas
 
 Vi har därför tänkt införa en ny klass, CarApplication, som ska ha en main metod där vår view samt kontroller skapas.
 
-För att bli av med beroendet mellan CarController och DrawPanel så inför vi ett interface Updateable. Dels för att uppnå DIP då den just nu är beroende av JPanel, men också för att CarController ska ha ett lösare beroende till DrawPanel. Updateable ska bara ha två metoder, move(..) och paint(..).
+För att bli av med beroendet mellan CarController och DrawPanel så inför vi ett interface UpdateablePanel. Dels för att uppnå DIP då den just nu är beroende av JPanel, men också för att CarController ska ha ett lösare beroende till DrawPanel. UpdateablePanel ska bara ha två metoder, move(..) och paint(..).
 
 
 

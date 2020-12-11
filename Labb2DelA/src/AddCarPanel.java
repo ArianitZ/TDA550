@@ -2,13 +2,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ *  A class that has two buttons, add and remove car.
+ *
+ * @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
+ * @version 1.0
+ */
 public class AddCarPanel extends JPanel {
 
-    JButton addCar;
-    JButton removeCar;
+    private JButton addCar;
+    private JButton removeCar;
 
-    CarModel carModel;
+    private CarModel carModel;
 
     public AddCarPanel(CarModel carModel){
         this.carModel = carModel;
@@ -32,7 +37,8 @@ public class AddCarPanel extends JPanel {
                 if(carModel.getNumberOfCars() < 10){
                     double xPosition = 0.0;
                     double yPosition = carModel.getNumberOfCars()*70.0;
-                    carModel.addCar(CarFactory.createVolvo240(xPosition, yPosition));
+
+                    carModel.addCar(CarFactory.createRandomVehicle(xPosition, yPosition));
                 }
             }
         });
@@ -44,9 +50,7 @@ public class AddCarPanel extends JPanel {
                 carModel.removeCar();
             }
         });
+
+
     }
-
-
-
-
 }

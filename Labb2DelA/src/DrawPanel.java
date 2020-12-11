@@ -6,12 +6,18 @@ import javax.swing.*;
 import java.util.*;
 import java.util.List;
 
-// This panel represent the animated part of the view with the car images.
-public class DrawPanel extends JPanel implements Updateable{
+/**
+ *  A class that represents the animated part of the view with the car images.
+ *  Is controlled by CarController.
+ *
+ * @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
+ * @version 1.0
+ */
+public class DrawPanel extends JPanel implements UpdateablePanel {
 
 
-    Map<String, BufferedImage> vehicleImages;
-    List<Tuple<String, Point>> listOfVehiclePositions;
+    private Map<String, BufferedImage> vehicleImages;
+    private List<Tuple<String, Point>> listOfVehiclePositions;
 
 
     @Override
@@ -35,7 +41,6 @@ public class DrawPanel extends JPanel implements Updateable{
     }
 
 
-    // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
