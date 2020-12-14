@@ -13,9 +13,15 @@ public class AddCarPanel extends JPanel {
     private JButton addCar;
     private JButton removeCar;
 
+    private int xDimension;
+    private int yDimension;
+
     private CarModel carModel;
 
-    public AddCarPanel(CarModel carModel){
+    public AddCarPanel(int xDim, int yDim, CarModel carModel){
+        this.xDimension = xDim;
+        this.yDimension = yDim;
+
         this.carModel = carModel;
 
         initializeComponents();
@@ -25,22 +31,17 @@ public class AddCarPanel extends JPanel {
         addCar = new JButton("Add car");
         removeCar = new JButton("Remove car");
 
-        this.setLayout(new GridLayout(1,2));
+        this.setPreferredSize(new Dimension(xDimension, yDimension));
+        this.setBackground(Color.gray);
 
+        this.setLayout(new GridLayout(1,2));
         this.add(addCar,0);
         this.add(removeCar,1);
 
 
         addCar.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if(carModel.getNumberOfCars() < 10){
-                    double xPosition = 0.0;
-                    double yPosition = carModel.getNumberOfCars()*70.0;
-
-                    carModel.addCar(CarFactory.createRandomVehicle(xPosition, yPosition));
-                }
-            }
+            public void actionPerformed(ActionEvent e) { carModel.addCar(); }
         });
 
 

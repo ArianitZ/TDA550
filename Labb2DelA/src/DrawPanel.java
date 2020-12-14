@@ -13,40 +13,18 @@ import java.util.List;
  * @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
  * @version 1.0
  */
-public class DrawPanel extends JPanel implements UpdateablePanel {
-
+public class DrawPanel extends JPanel{
 
     private Map<String, BufferedImage> vehicleImages;
     private List<Tuple<String, Point>> listOfVehiclePositions;
 
 
-    @Override
-    public Point getViewDimensions(){
-        return new Point(this.getSize().height, this.getSize().width);
-    }
-
-
-    @Override
-    public void move(Vehicle car) {
-        Point vehiclePoint = new Point((int)car.getxPosition(), (int)car.getyPosition());
-        String vehicleType = car.getModelName();
-
-        this.listOfVehiclePositions.add(new Tuple(vehicleType, vehiclePoint));
-    }
-
-
-    @Override
-    public void paint(){
-        this.repaint();
-    }
-
-
-    public DrawPanel(int x, int y) {
+    public DrawPanel(int xDim, int yDim) {
         this.setDoubleBuffered(true);
-        this.setPreferredSize(new Dimension(x, y));
+        this.setPreferredSize(new Dimension(xDim, yDim));
         this.setBackground(Color.green);
 
-        this.listOfVehiclePositions = new ArrayList<>();
+        this.listOfVehiclePositions = new Stack<>();
 
         try {
             vehicleImages = new HashMap<>();
@@ -62,6 +40,19 @@ public class DrawPanel extends JPanel implements UpdateablePanel {
     }
 
 
+    protected void move(Vehicle car) {
+        Point vehiclePoint = new Point((int)car.getxPosition(), (int)car.getyPosition());
+        String vehicleType = car.getModelName();
+
+        this.listOfVehiclePositions.add(new Tuple(vehicleType, vehiclePoint));
+    }
+
+
+    protected void paint(){
+        this.repaint();
+    }
+
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -69,8 +60,7 @@ public class DrawPanel extends JPanel implements UpdateablePanel {
         int size = listOfVehiclePositions.size();
 
         for (int i = 0; i < size; i++){
-            Tuple<String, Point> vehicle = listOfVehiclePositions.remove(0);
-
+            Tuple<String, Point> vehicle = ((Stack<Tuple<String, Point>>)listOfVehiclePositions).pop();
             g.drawImage(vehicleImages.get(vehicle.getFirstMember()), vehicle.getSecondMember().x,
                                           vehicle.getSecondMember().y, null);
         }

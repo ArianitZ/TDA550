@@ -19,17 +19,24 @@ public class CarApplication {
 
     public static void main(String[] args){
 
-        CarModel model = new CarModel();
-        createCars(model);
+        int xDimension = 1000;
+        int yDimension = 1000;
+        int maxNumberOfCars = 10;
 
-        CarController cc = new CarController(model);
-        SpeedPanel speedPanel = new SpeedPanel(model);
-        AddCarPanel addCarPanel = new AddCarPanel(model);
+        CarModel carModel = new CarModel(xDimension, (int)(yDimension*7.0/10), maxNumberOfCars);
+        createCars(carModel);
 
-        CarView frame = new CarView("CarSim 1.0", cc, speedPanel, addCarPanel);
+        SpeedPanel speedPanel = new SpeedPanel(xDimension, (int)(yDimension/20.0));
+        AddCarPanel addCarPanel = new AddCarPanel(xDimension, (int)(yDimension/20.0), carModel);
 
-        cc.frame = frame.drawPanel;
-        cc.startTimer();
+        CarView carView = new CarView("CarSimulation 1.0", xDimension, yDimension, speedPanel, addCarPanel);
+
+        CarController carController = new CarController(xDimension, (int)(yDimension/7.0), carModel, carView);
+
+        carModel.addObserver(carView);
+        carModel.addObserver(speedPanel);
+
+        carController.startTimer();
 
      }
 

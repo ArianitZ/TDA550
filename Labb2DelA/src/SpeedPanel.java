@@ -1,5 +1,7 @@
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 /**
  *  A class that shows the speed of the vehicles contained in CarModel as a JLabel.
@@ -7,24 +9,55 @@ import java.util.List;
  * @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
  * @version 1.0
  */
-public class SpeedPanel extends JPanel {
+public class SpeedPanel extends JPanel implements Observer{
 
     private List<JLabel> labelList;
-    private final CarModel carModel;
-    private int numberOfCars;
+    private int xDimension;
+    private int yDimension;
 
 
-    public SpeedPanel(CarModel carModel){
-        this.carModel = carModel;
-        this.numberOfCars = carModel.getNumberOfCars();
+    public SpeedPanel(int xDim, int yDim){
+        this.xDimension = xDim;
+        this.yDimension = yDim;
+
         this.labelList = new ArrayList<>();
 
-        initializeComponents();
+        initializePanel();
     }
 
 
-    private void initializeComponents(){
-        for (Vehicle car : carModel){
+    private void initializePanel(){
+        add(new JLabel("Speed panel"));
+
+        this.setPreferredSize(new Dimension(this.xDimension, this.yDimension));
+        this.setBackground(Color.magenta);
+    }
+
+
+    private void updatePanel(){
+        this.removeAll();
+        for (JLabel label : labelList){
+            this.add(label);
+        }
+    }
+
+
+    @Override
+    public void actOnSpeedChange(Iterator<Vehicle> carIterator){ updateSpeed(carIterator); }
+
+    @Override
+    public void actOnNumberOfCarsChange(Iterator<Vehicle> carIterator) {updateSpeed(carIterator);}
+
+    @Override
+    public void actOnPositionChange(Iterator<Vehicle> carIterator) { }
+
+
+    private void updateSpeed(Iterator<Vehicle> carIterator){
+
+        labelList.clear();
+
+        while(carIterator.hasNext()){
+            Vehicle car = carIterator.next();
             String carName = car.getModelName();
             double carSpeed = car.getCurrentSpeed();
 
@@ -33,42 +66,10 @@ public class SpeedPanel extends JPanel {
             labelList.add(new JLabel(labelString));
         }
 
-        initializePanel();
-    }
-
-
-    private void initializePanel(){
-        for(JLabel label : labelList){
-            this.add(label);
-        }
-    }
-
-
-    private void synchronizeLabelList(){
-        labelList = new ArrayList<>();
-        this.removeAll();
-        initializeComponents();
-        this.numberOfCars = carModel.getNumberOfCars();
-    }
-
-
-    public void updateSpeed(){
-
-        if(numberOfCars != carModel.getNumberOfCars()){
-            synchronizeLabelList();
-        }
-
-        int ix = 0;
-        for(Vehicle car: carModel){
-            String carName = car.getModelName();
-            double carSpeed = car.getCurrentSpeed();
-
-            String labelString = carName + ": " + carSpeed;
-
-            labelList.get(ix).setText(labelString);
-            ix++;
-        }
+        this.updatePanel();
         this.repaint();
         this.doLayout();
+
     }
+
 }
