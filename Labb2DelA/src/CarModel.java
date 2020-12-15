@@ -151,7 +151,6 @@ public class CarModel implements Iterable<Vehicle> {
             car.move();
         }
         notifyChangedPosition();
-
     }
 
 
