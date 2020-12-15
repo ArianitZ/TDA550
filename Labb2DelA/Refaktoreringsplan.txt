@@ -1,10 +1,14 @@
 Vi har tänkt att skapa en klass som får heta CarFactory som ersätter beroendet till konstruktorerna till Volvo240, Saab95 och Scania. På så vis uppnår vi DIP.
 
-Just nu följer inte CarController SRP då den har en mainmetod där allt skapas, den har en direkt kontakt med CarView och updaterar DrawPanel via den samt att den har metoder som är i kontakt med modellen (Vehicle och dess subklasser). 
+Just nu följer inte CarController SRP då den har en mainmetod där allt skapas, den har en direkt kontakt med CarView och updaterar DrawPanel via den samt att den har metoder som är i kontakt med Vehicle och dess subklasser. 
+Även CarView är problematisk då den har ett beroende både till DrawPanel och CarController. Just nu agerar CarView mer som en controller än en view. För att ta bort det cirkulära beroende mellan CarView och CarController kommer
+vi att flytta på alla knappar till CarController som i sin tur ska endast delegera/signalera vidare till en ny klass CarModel. Denna nya klass ska hantera modellen för vår applikation - nämligen hur bilarna ska styras och förvaras. 
+Vi kommer att använda oss av MVC - pattern för att uppnå detta. 
 
-Vi har därför tänkt införa en ny klass, CarApplication, som ska ha en main metod där vår view samt kontroller skapas.
+Vi har även tänkt införa en ny klass, CarApplication, som ska ha en main metod där vår view, model och controller skapas.
 
-För att bli av med beroendet mellan CarController och DrawPanel så inför vi ett interface UpdateablePanel. Dels för att uppnå DIP då den just nu är beroende av JPanel, men också för att CarController ska ha ett lösare beroende till DrawPanel. UpdateablePanel ska bara ha två metoder, move(..) och paint(..).
+För att bli av med beroendet mellan CarController och DrawPanel så inför vi ett interface Observer som ska innehålla metoderna "actOnSpeedChange", "actOnPositionChange" och "actOnChangeInNumberOfCars". CarView kommer att implementera
+detta interface och CarModel kommer att agera som Observable genom att ha en lista med alla Observers samt metoderna "notifyOnSpeedChange", "notifyOnPositionChange" och "notifyOnChangeInNumberOfCars". 
 
 
 
