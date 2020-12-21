@@ -1,3 +1,9 @@
+/**
+ *  An interface that acts as an observer for a car view.
+ *
+ * @author Arianit Zeqiri, Jakob Stråhle, Veronica Segerlind
+ * @version 1.0
+ */
 public interface ViewObserver {
 
     void actOnStartEngine();
