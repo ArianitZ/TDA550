@@ -31,12 +31,14 @@ public class CarApplication {
 
         CarView carView = new CarView("CarSimulation 1.0", xDimension, yDimension, speedPanel, addCarPanel);
 
-        CarController carController = new CarController(xDimension, (int)(yDimension/7.0), carModel, carView);
+        CarController carController = new CarController(carModel);
 
         carModel.addObserver(carView);
         carModel.addObserver(speedPanel);
 
+        carView.addObserver(carController);
         carController.startTimer();
+
 
      }
 
